@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AB1DC401D800E6F8DF /* GameViewController.swift */; };
+		E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */; };
 		E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
 		E19CA4411DC28DF3000C6C7C /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */; };
 		E19CA4431DC28DF3000C6C7C /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E16988AB1DC401D800E6F8DF /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePlayerModel.swift; sourceTree = "<group>"; };
 		E19CA43B1DC28DF3000C6C7C /* KidsHelpReading.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsHelpReading.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewController.swift; sourceTree = "<group>"; };
@@ -79,15 +83,17 @@
 			isa = PBXGroup;
 			children = (
 				E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */,
+				E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */,
+				E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */,
 				E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */,
 				E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */,
+				E16988AB1DC401D800E6F8DF /* GameViewController.swift */,
 				E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */,
 				E19CA4441DC28DF3000C6C7C /* Main.storyboard */,
 				E19CA4471DC28DF3000C6C7C /* Assets.xcassets */,
 				E19CA4491DC28DF3000C6C7C /* LaunchScreen.storyboard */,
 				E19CA44C1DC28DF3000C6C7C /* Info.plist */,
 				E19CA4531DC29138000C6C7C /* Credits.rtf */,
-				E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */,
 			);
 			path = KidsHelpReading;
 			sourceTree = "<group>";
@@ -209,6 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */,
+				E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */,
 				E19CA4431DC28DF3000C6C7C /* CreatorViewController.swift in Sources */,
 				E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */,
 				E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */,

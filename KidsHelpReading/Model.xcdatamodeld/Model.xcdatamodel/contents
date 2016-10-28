@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Game" representedClassName="GameModel" syncable="YES" codeGenerationType="class">
         <attribute name="endTime" optional="YES" attributeType="Date" defaultDateTimeInterval="499297740" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="points" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -13,6 +13,7 @@
         <attribute name="countSubjects" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="countVerbs" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="countWords" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="text" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
         <relationship name="games" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Game" inverseName="story" inverseEntity="Game" syncable="YES"/>
@@ -27,7 +28,7 @@
     </entity>
     <elements>
         <element name="Game" positionX="88" positionY="63" width="128" height="118"/>
-        <element name="Story" positionX="-135" positionY="-45" width="128" height="163"/>
+        <element name="Story" positionX="-135" positionY="-45" width="128" height="178"/>
         <element name="Time" positionX="261" positionY="138" width="128" height="133"/>
     </elements>
 </model>

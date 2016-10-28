@@ -14,6 +14,7 @@ class DataContainer {
     
     var app: AppDelegate;
     var data: [StoryModel]?;
+    var selectedStory: StoryModel?;
     
     init( from : AppDelegate) {
         app = from;
@@ -21,6 +22,10 @@ class DataContainer {
     
     func load() {
         self.initializeDatabase()
+        if (data?.count == 0) {
+            self.loadTestDatabase()
+            self.initializeDatabase()
+        }
     }
     
     func save(story: StoryModel) {
@@ -28,18 +33,25 @@ class DataContainer {
     }
     
     
-    func loadTestDatabase() {
+    func createNewStory( name: String, text: String, points: Int16) {
         let entityDescription = NSEntityDescription.entity(forEntityName: "Story", in: managedObjectContext)
         
         let newStory = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext)
-        newStory.setValue("Test daten", forKey: "Title");
-        newStory.setValue("Ich heisse Yannick", forKey: "Text");
+        newStory.setValue(name, forKey: "Title");
+        newStory.setValue(text, forKey: "Text");
+        newStory.setValue(points, forKey: "points")
         
         do {
             try newStory.managedObjectContext?.save()
         } catch {
             print(error)
         }
+        
+    }
+    
+    func loadTestDatabase() {
+        self.createNewStory(name: "Kleine Hexe", text: "Das ist die kleine Hexe und das ist eine schöne Geschichte", points: 7)
+        self.createNewStory(name: "Das schwarze Gespenst", text: "Ich bin das schwarze Gespenst und niemand hat vor mir Angst", points: 22)
     }
     
     func initializeDatabase() {
@@ -65,5 +77,5 @@ class DataContainer {
     func getStories() -> [StoryModel] {
         return self.data!
     }
-    
+        
 }
