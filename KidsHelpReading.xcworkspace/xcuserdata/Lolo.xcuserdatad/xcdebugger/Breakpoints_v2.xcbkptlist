@@ -47,5 +47,84 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KidsHelpReading/KidsHelpReadingTests/KidsHelpReadingTests.swift"
+            timestampString = "499424599.361027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "testExample()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KidsHelpReadingTests.KidsHelpReadingTests.testExample () -&gt; ()"
+                  moduleName = "KidsHelpReadingTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Lolo/git/KidsHelpReading/KidsHelpReading/KidsHelpReadingTests/KidsHelpReadingTests.swift"
+                  timestampString = "499424611.731754"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "91">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KidsHelpReadingTests.KidsHelpReadingTests.(testExample () -&gt; ()).(implicit closure #1)"
+                  moduleName = "KidsHelpReadingTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Lolo/git/KidsHelpReading/KidsHelpReading/KidsHelpReadingTests/KidsHelpReadingTests.swift"
+                  timestampString = "499424611.734567"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "33">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "KidsHelpReadingTests.KidsHelpReadingTests.(testExample () -&gt; ()).(implicit closure #2)"
+                  moduleName = "KidsHelpReadingTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Lolo/git/KidsHelpReading/KidsHelpReading/KidsHelpReadingTests/KidsHelpReadingTests.swift"
+                  timestampString = "499424611.73795"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KidsHelpReading/KidsHelpReading/GameViewController.swift"
+            timestampString = "499446494.01888"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "GameViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -9,7 +9,7 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>Testdata.xcscheme</key>
+		<key>KidsHelpReadingTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -17,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E16988B21DC4983800E6F8DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E19CA43A1DC28DF3000C6C7C</key>
 		<dict>
 			<key>primary</key>

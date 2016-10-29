@@ -10,8 +10,10 @@
 
 import UIKit
 
-class ReadViewController: UIViewController {
+class ReadViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var storyCollectionView: UICollectionView!
     
     var appDelegate:AppDelegate {
@@ -52,11 +54,6 @@ class ReadViewController: UIViewController {
     }
     
 
-    
-}
-
-extension ReadViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     //1
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -88,7 +85,11 @@ extension ReadViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        return false;
+        if (sender as AnyObject? === addButton || sender as AnyObject? === settingsButton) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     
