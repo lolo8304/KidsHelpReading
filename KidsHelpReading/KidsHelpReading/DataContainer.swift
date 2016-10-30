@@ -21,6 +21,7 @@ class DataContainer {
     
     var data: [StoryModel] = [];
     var selectedStory: StoryModel?;
+    var mode: GameMode = GameModeWord();
     
     private init() {
     }
@@ -50,8 +51,9 @@ class DataContainer {
     
     func createNewStory( name: String, text: String, points: Int16) {
         let newStory:StoryModel = StoryModel(context: managedObjectContext)
+        let trimmed = text.replacingOccurrences(of: "\n", with: " ")
         newStory.title = name
-        newStory.text = text
+        newStory.text = trimmed
         newStory.points = points
         
         do {
@@ -67,6 +69,8 @@ class DataContainer {
     func loadTestDatabase() -> DataContainer {
         self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe", points: 0)
         self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst", points: 0)
+        self.createNewStory(name: "Beast quest", file: "Text.Beast Quest", points: 0)
+        
         self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter", points: 0)
         return self
     }
@@ -102,5 +106,15 @@ class DataContainer {
     func getStories() -> [StoryModel] {
         return self.data
     }
-        
+    
+    
+    func setModeWord() -> GameMode {
+        self.mode = GameModeWord()
+        return self.mode
+    }
+    func setModeWordBySentence() -> GameMode {
+        self.mode = GameModeWordBySentence()
+        return self.mode
+    }
+    
 }

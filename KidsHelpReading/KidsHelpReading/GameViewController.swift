@@ -23,8 +23,11 @@ class GameViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var maxLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var textToReadLabel: UILabel!
-    @IBOutlet weak var stopButton: UIButton!
+    
     @IBOutlet weak var displayTimeLabel: UILabel!
+    
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var weiterButton: UIButton!
     
     var timer = Timer()
@@ -45,21 +48,6 @@ class GameViewController: UIViewController, UINavigationControllerDelegate {
         self.textToReadLabel.text = "\(self.story.word())"
     }
 
-    @IBAction func stop(_ sender: UIButton) {
-        timer.invalidate()
-        timer == nil
-        self.story.stop()
-        self.updateProgressBar()
-        self.weiterButton.isEnabled = false
-        self.stopButton.isEnabled = false
-    }
-    @IBAction func next(_ sender: UIButton) {
-        self.story.next()
-        self.updateProgressBar()
-        if (self.story.lastGame().isDone()) {
-            self.stop(sender)
-        }
-    }
     
     func updateTime() {
         
@@ -97,15 +85,38 @@ class GameViewController: UIViewController, UINavigationControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func didMove(toParentViewController parent: UIViewController?) {
-        super.didMove(toParentViewController: parent)
-        if parent == nil{
-            self.stop(self.stopButton)
-            self.story.save()
-        }
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        self.stop(self.stopButton)
+        self.story.save()
     }
+    
+    // MARK: navigation
+    
+    @IBAction func stop(_ sender: UIButton) {
+        timer.invalidate()
+        timer == nil
+        self.story.stop()
+        self.updateProgressBar()
+        self.weiterButton.isEnabled = false
+        self.weiterButton.isHidden = true
+        self.stopButton.isEnabled = false
+        self.stopButton.isHidden = true
+        self.okButton.isEnabled = false
+        self.okButton.isHidden = true
+    }
+    @IBAction func next(_ sender: UIButton) {
+        self.story.next()
+        self.updateProgressBar()
+        if (self.story.lastGame().isDone()) {
+            self.stop(sender)
+        }
+    }
+    @IBAction func skip(_ sender: UIButton) {
+        self.story.skip()
+        self.updateProgressBar()
+    }
+
+    
     
 }
 

@@ -14,35 +14,47 @@ private extension Array {
         let index = Int(arc4random_uniform(UInt32(count)))
         return self[index]
     }
+    var randomElementIndex: Int {
+        return Int(arc4random_uniform(UInt32(count)))
+    }
 }
 
-class GamePlayerModel {
 
-    var story: StoryModel;
-    var game: GameModel;
-    var timer: TimeModel?;
-    var text: String?;
+extension String {
     
-    init(story: StoryModel) {
-        self.story = story
-        self.game = story.newGame()
+    var allWords: [String] {
+        var words = [String]()
+        if (self == "") { return words }
+        let range = self.range(of: self)
+        self.enumerateSubstrings(in: range!, options: .byWords) {w,_,_,_ in
+            guard let word = w else {return}
+            words.append(word)
+        }
+        return words
     }
-    
-    init(story: StoryModel, game: GameModel) {
-        self.story = story
-        self.game = game;
+    var allSentences: [String] {
+        var sentences = [String]()
+        if (self == "") { return sentences }
+        let range = self.range(of: self)
+        self.enumerateSubstrings(in: range!, options: .bySentences) {s,_,_,_ in
+            guard let sentence = s else {return}
+            sentences.append(sentence)
+        }
+        return sentences
     }
-    
-    func startGame(mode: GameMode) {
-        self.game.start()
-        self.text = mode.start(gamePlay: self);
-    }
-    
-    func stopGame() {
-        self.game.endTime = NSDate()
+    var allWordsBySentences: [[String]] {
+        var sentences = [[String]]()
+        if (self == "") { return sentences }
+        let range = self.range(of: self)
+        self.enumerateSubstrings(in: range!, options: .bySentences) {s,_,_,_ in
+            guard let sentence: String = s else {return}
+            sentences.append(sentence.allWords)
+        }
+        return sentences
     }
     
 }
+
 
 extension StoryModel {
     
@@ -51,18 +63,30 @@ extension StoryModel {
         self.countWords = Int16(words.count)
         return words
     }
+    var allSentences: [String] {
+        let sentences: [String] = (self.text?.allSentences)!
+        return sentences
+    }
+    var allWordsbySentences: [[String]] {
+        let sentences: [[String]] = (self.text?.allWordsBySentences)!
+        return sentences
+    }
     
     func start() -> GameModel {
         self.newGame().start()
         self.points = 0
-        self.lastGame().lastTimer().word = allWords.randomElement
+        DataContainer.sharedInstance.setModeWordBySentence().start(story: self)
         return self.lastGame()
     }
     func word() -> String {
         return self.lastGame().word()
     }
     func next() {
-        self.lastGame().next().word = allWords.randomElement
+        self.lastGame().next()
+        DataContainer.sharedInstance.mode.next(story: self)
+    }
+    func skip() {
+        self.lastGame().skip().word = allWords.randomElement
     }
     func stop() {
         self.lastGame().stop()
@@ -95,6 +119,7 @@ extension StoryModel {
     func newGame() -> GameModel {
         let newGame: GameModel = GameModel(context: managedObjectContext!)
         self.addToGames(newGame)
+        self.allWords
         return newGame
     }
     func lastGame() -> GameModel {
@@ -114,6 +139,10 @@ extension GameModel {
     func next() -> TimeModel {
         self.lastTimer().doneStep()
         return self.newStep()
+    }
+    func skip() -> TimeModel {
+        self.lastTimer().skip()
+        return self.lastTimer()
     }
     func stop() {
         self.doneStep()
@@ -192,6 +221,9 @@ extension TimeModel {
         self.seconds = Int16(NSDate().timeIntervalSince(self.startTime as! Date))
         self.game!.updatePoints(point: self.point)
     }
+    func skip() {
+        self.initStep()
+    }
     func initStep() {
         self.timermode = false
         self.cheatmode = false
@@ -220,7 +252,13 @@ extension TimeModel {
 }
 
 class GameMode {
-    func start(gamePlay: GamePlayerModel) -> String {
+    var wordIndex: Int = 0;
+    var sentenceIndex: Int = 0;
+
+    func start(story: StoryModel) -> String {
+        return "no-game-mode";
+    }
+    func next(story: StoryModel) -> String {
         return "no-game-mode";
     }
 }
@@ -228,24 +266,48 @@ class GameMode {
 
 
 class GameModeWord: GameMode {
- 
-    override func start(gamePlay: GamePlayerModel) -> String {
-        return (gamePlay.story.text?.allWords[0])!
+    
+    override func start(story: StoryModel) -> String {
+        let word: String = story.allWords.randomElement
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+    override func next(story: StoryModel) -> String {
+        let old: String = story.lastGame().lastTimer().word!
+        let new: String = story.allWords.randomElement
+        if (story.allWords.count > 1 && new == old) { return self.next(story: story) }
+        story.lastGame().lastTimer().word = new
+        return new
     }
 }
-
-extension String {
+class GameModeWordBySentence: GameMode {
     
-    var allWords: [String] {
-        var words = [String]()
-        if (self == "") { return words }
-        let range = self.range(of: self)
-        self.enumerateSubstrings(in: range!, options: .byWords) {w,_,_,_ in
-            guard let word = w else {return}
-            words.append(word)
+    override func start(story: StoryModel) -> String {
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        self.sentenceIndex = wordsBySentences.randomElementIndex
+        self.wordIndex = 0
+        let word: String = wordsBySentences[self.sentenceIndex][self.wordIndex]
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+    override func next(story: StoryModel) -> String {
+        
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        var word: String = ""
+        self.wordIndex += 1
+        if (self.wordIndex == wordsBySentences[self.sentenceIndex].count) {
+            self.sentenceIndex = wordsBySentences.randomElementIndex
+            self.wordIndex = 0
+            word = wordsBySentences[self.sentenceIndex][self.wordIndex]
+        } else {
+            if (self.wordIndex + 1 == wordsBySentences[self.sentenceIndex].count) {
+                word = "\(wordsBySentences[self.sentenceIndex][self.wordIndex])."
+            } else {
+                word = wordsBySentences[self.sentenceIndex][self.wordIndex]
+            }
         }
-        return words
+        story.lastGame().lastTimer().word = word
+        return word
         
     }
-    
 }

@@ -20,11 +20,7 @@ class CreatorViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    @IBAction func add(_ sender: Any) {
-        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text, points: 0)
-    }
-    
+
     override func viewDidAppear(_ animated: Bool) {
     }
 
@@ -32,5 +28,13 @@ class CreatorViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: navigation
+    @IBAction func add(_ sender: UIBarButtonItem) {
+        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text, points: 0)
+        self.navigationController?.popViewController(animated: true)
+
+    }
+
 }
 
