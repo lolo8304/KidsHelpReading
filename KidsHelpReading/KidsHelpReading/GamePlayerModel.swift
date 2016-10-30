@@ -248,6 +248,9 @@ extension TimeModel {
         }
         
     }
+    func cheated() {
+        self.cheatmode = true
+    }
 
 }
 
@@ -267,19 +270,24 @@ class GameMode {
 
 class GameModeWord: GameMode {
     
+    
     override func start(story: StoryModel) -> String {
-        let word: String = story.allWords.randomElement
+        self.wordIndex = story.allWords.randomElementIndex
+        let word: String = story.allWords[self.wordIndex]
         story.lastGame().lastTimer().word = word
         return word
     }
     override func next(story: StoryModel) -> String {
         let old: String = story.lastGame().lastTimer().word!
-        let new: String = story.allWords.randomElement
+        self.wordIndex = story.allWords.randomElementIndex
+        let new: String = story.allWords[self.wordIndex]
         if (story.allWords.count > 1 && new == old) { return self.next(story: story) }
         story.lastGame().lastTimer().word = new
         return new
     }
 }
+
+
 class GameModeWordBySentence: GameMode {
     
     override func start(story: StoryModel) -> String {
@@ -291,7 +299,6 @@ class GameModeWordBySentence: GameMode {
         return word
     }
     override func next(story: StoryModel) -> String {
-        
         let wordsBySentences: [[String]] = story.allWordsbySentences
         var word: String = ""
         self.wordIndex += 1
@@ -311,3 +318,33 @@ class GameModeWordBySentence: GameMode {
         
     }
 }
+
+class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
+    
+    func buildWordPrefixSuffix(story: StoryModel, w: String) -> String {
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        var word: String = w
+        if (self.wordIndex > 0) {
+            let prefix = wordsBySentences[self.sentenceIndex][self.wordIndex-1]
+            word = "(\(prefix))     \(word)"
+        }
+        if (self.wordIndex + 1 < story.allWords.count) {
+            let suffix = wordsBySentences[self.sentenceIndex][self.wordIndex+1]
+            word = "\(word)     (\(suffix))"
+        }
+        return word
+    }
+    override func start(story: StoryModel) -> String {
+        var word: String = super.start(story: story)
+        word = self.buildWordPrefixSuffix(story: story, w: word)
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+    override func next(story: StoryModel) -> String {
+        var word: String = super.next(story: story)
+        word = self.buildWordPrefixSuffix(story: story, w: word)
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+}
+

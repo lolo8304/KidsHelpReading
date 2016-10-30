@@ -31,7 +31,7 @@ class CreatorViewController: UIViewController {
     
     // MARK: navigation
     @IBAction func add(_ sender: UIBarButtonItem) {
-        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text, points: 0)
+        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text)
         self.navigationController?.popViewController(animated: true)
 
     }

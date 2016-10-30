@@ -45,16 +45,16 @@ class DataContainer {
     }
 
     
-    func createNewStory( name: String, file: String, points: Int16) {
-        self.createNewStory(name: name, text: readFromFile(name: file), points: points)
+    func createNewStory( name: String, file: String) {
+        self.createNewStory(name: name, text: readFromFile(name: file))
     }
     
-    func createNewStory( name: String, text: String, points: Int16) {
+    func createNewStory( name: String, text: String) {
         let newStory:StoryModel = StoryModel(context: managedObjectContext)
         let trimmed = text.replacingOccurrences(of: "\n", with: " ")
         newStory.title = name
         newStory.text = trimmed
-        newStory.points = points
+        newStory.points = 0
         
         do {
             self.data.append(newStory)
@@ -67,11 +67,11 @@ class DataContainer {
     
     
     func loadTestDatabase() -> DataContainer {
-        self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe", points: 0)
-        self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst", points: 0)
-        self.createNewStory(name: "Beast quest", file: "Text.Beast Quest", points: 0)
+        self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe")
+        self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst")
+        self.createNewStory(name: "Beast quest", file: "Text.Beast Quest")
         
-        self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter", points: 0)
+        self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter")
         return self
     }
     
@@ -116,5 +116,9 @@ class DataContainer {
         self.mode = GameModeWordBySentence()
         return self.mode
     }
-    
+    func setModeWordPrefixBySentence() -> GameMode {
+        self.mode = GameModeWordPrefixSuffixBySentence()
+        return self.mode
+    }
+
 }
