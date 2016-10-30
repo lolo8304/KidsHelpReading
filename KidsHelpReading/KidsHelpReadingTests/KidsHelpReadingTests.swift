@@ -20,16 +20,18 @@ class KidsHelpReadingTests: XCTestCase {
         super.tearDown()
     }
     
-    func wordSplit() {
+    func testWordSplit() {
         let words: [String] = "Das ist ein Text".allWords;
         XCTAssert(words.count == 4, "these are 4 words")
         XCTAssert(words[0] == "Das", "first word is 'Das'")
         
     }
-    func wordSplitEmpty() {
+    func testWordSplitEmpty() {
         let words: [String] = "".allWords;
         XCTAssert(words.count == 0, "there is no word")
-        
+    }
+    
+    func testDataContainer() {
     }
     
     func testPerformanceExample() {

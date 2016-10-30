@@ -39,6 +39,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewWillAppear(animated)
         self.storyCollectionView.delegate = self
         self.storyCollectionView.dataSource = self
+        self.storyCollectionView.reloadData()
         
     }
     
@@ -96,6 +97,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         self.container.selectedStory = self.stories[indexPath.item]
+        self.container.selectedStory?.start()
         performSegue(withIdentifier: "PlayGame", sender: nil)
     }
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

@@ -13,27 +13,24 @@ class CreatorViewController: UIViewController {
     var appDelegate:AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-    
+    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    @IBAction func add(_ sender: Any) {
+        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text, points: 0)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        let data: DataContainer? = appDelegate.container
-        print("Container: @s", data)
-
-        print(data?.data?[0])
-        self.textView.text = appDelegate.container?.data?[0].text
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBOutlet weak var textView: UITextView!
-
 }
 

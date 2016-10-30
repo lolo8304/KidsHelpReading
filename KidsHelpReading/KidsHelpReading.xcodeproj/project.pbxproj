@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1152D1B1DC5508000C0083F /* StoryModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1152D1A1DC5508000C0083F /* StoryModelTests.swift */; };
 		E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AB1DC401D800E6F8DF /* GameViewController.swift */; };
 		E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */; };
 		E16988B61DC4983800E6F8DF /* KidsHelpReadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988B51DC4983800E6F8DF /* KidsHelpReadingTests.swift */; };
 		E16988BD1DC4990700E6F8DF /* GamePlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */; };
-		E16988BE1DC49A8C00E6F8DF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E16988BF1DC49AEC00E6F8DF /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */; };
-		E16988C01DC49B4D00E6F8DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
 		E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
 		E19CA4411DC28DF3000C6C7C /* ReadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */; };
 		E19CA4431DC28DF3000C6C7C /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */; };
@@ -21,6 +20,12 @@
 		E19CA4481DC28DF3000C6C7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E19CA4471DC28DF3000C6C7C /* Assets.xcassets */; };
 		E19CA44B1DC28DF3000C6C7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E19CA4491DC28DF3000C6C7C /* LaunchScreen.storyboard */; };
 		E19CA4541DC29138000C6C7C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E19CA4531DC29138000C6C7C /* Credits.rtf */; };
+		E1ABF07E1DC5546600DC42EB /* GenericTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ABF07D1DC5546600DC42EB /* GenericTestCase.swift */; };
+		E1ABF07F1DC5622300DC42EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
+		E1ABF0801DC5680000DC42EB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
+		E1ABF0831DC5978E00DC42EB /* Text.Die Kleine Hexe.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */; };
+		E1ABF0851DC5984E00DC42EB /* Text.Das kleine Gespenst.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */; };
+		E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */; };
 		E1B62E071DC2A833009E2D98 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */; };
 		E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1B62E0C1DC2AF67009E2D98 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */; };
@@ -38,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1152D1A1DC5508000C0083F /* StoryModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryModelTests.swift; sourceTree = "<group>"; };
 		E16988AB1DC401D800E6F8DF /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePlayerModel.swift; sourceTree = "<group>"; };
 		E16988B31DC4983800E6F8DF /* KidsHelpReadingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsHelpReadingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +58,10 @@
 		E19CA44A1DC28DF3000C6C7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E19CA44C1DC28DF3000C6C7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E19CA4531DC29138000C6C7C /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		E1ABF07D1DC5546600DC42EB /* GenericTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTestCase.swift; sourceTree = "<group>"; };
+		E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Die Kleine Hexe.txt"; sourceTree = "<group>"; };
+		E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Das kleine Gespenst.txt"; sourceTree = "<group>"; };
+		E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Yannicks Wörter.txt"; sourceTree = "<group>"; };
 		E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E1B62E091DC2A8F2009E2D98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -82,6 +92,8 @@
 			children = (
 				E16988B51DC4983800E6F8DF /* KidsHelpReadingTests.swift */,
 				E16988B71DC4983800E6F8DF /* Info.plist */,
+				E1152D1A1DC5508000C0083F /* StoryModelTests.swift */,
+				E1ABF07D1DC5546600DC42EB /* GenericTestCase.swift */,
 			);
 			path = KidsHelpReadingTests;
 			sourceTree = "<group>";
@@ -109,6 +121,7 @@
 		E19CA43D1DC28DF3000C6C7C /* KidsHelpReading */ = {
 			isa = PBXGroup;
 			children = (
+				E1ABF0811DC5975700DC42EB /* texte */,
 				E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */,
 				E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */,
 				E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */,
@@ -123,6 +136,16 @@
 				E19CA4531DC29138000C6C7C /* Credits.rtf */,
 			);
 			path = KidsHelpReading;
+			sourceTree = "<group>";
+		};
+		E1ABF0811DC5975700DC42EB /* texte */ = {
+			isa = PBXGroup;
+			children = (
+				E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */,
+				E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */,
+				E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */,
+			);
+			name = texte;
 			sourceTree = "<group>";
 		};
 		E1B62E031DC2A7E2009E2D98 /* Frameworks */ = {
@@ -230,9 +253,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */,
 				E19CA44B1DC28DF3000C6C7C /* LaunchScreen.storyboard in Resources */,
 				E19CA4481DC28DF3000C6C7C /* Assets.xcassets in Resources */,
+				E1ABF0831DC5978E00DC42EB /* Text.Die Kleine Hexe.txt in Resources */,
 				E19CA4461DC28DF3000C6C7C /* Main.storyboard in Resources */,
+				E1ABF0851DC5984E00DC42EB /* Text.Das kleine Gespenst.txt in Resources */,
 				E19CA4541DC29138000C6C7C /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,9 +272,11 @@
 			files = (
 				E16988BD1DC4990700E6F8DF /* GamePlayerModel.swift in Sources */,
 				E16988B61DC4983800E6F8DF /* KidsHelpReadingTests.swift in Sources */,
-				E16988BE1DC49A8C00E6F8DF /* Model.xcdatamodeld in Sources */,
-				E16988C01DC49B4D00E6F8DF /* AppDelegate.swift in Sources */,
+				E1ABF07E1DC5546600DC42EB /* GenericTestCase.swift in Sources */,
+				E1ABF0801DC5680000DC42EB /* Model.xcdatamodeld in Sources */,
+				E1ABF07F1DC5622300DC42EB /* AppDelegate.swift in Sources */,
 				E16988BF1DC49AEC00E6F8DF /* DataContainer.swift in Sources */,
+				E1152D1B1DC5508000C0083F /* StoryModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +456,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W3U24WE3R3;
 				INFOPLIST_FILE = KidsHelpReading/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,7 +471,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = W3U24WE3R3;
 				INFOPLIST_FILE = KidsHelpReading/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -462,6 +490,7 @@
 				E16988BC1DC4983800E6F8DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E19CA4361DC28DF3000C6C7C /* Build configuration list for PBXProject "KidsHelpReading" */ = {
 			isa = XCConfigurationList;

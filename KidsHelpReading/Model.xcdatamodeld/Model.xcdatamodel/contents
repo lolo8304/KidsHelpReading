@@ -28,7 +28,7 @@
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="times" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="88" positionY="63" width="128" height="118"/>
+        <element name="Game" positionX="88" positionY="63" width="128" height="120"/>
         <element name="Story" positionX="-135" positionY="-45" width="128" height="178"/>
         <element name="Time" positionX="261" positionY="138" width="128" height="148"/>
     </elements>

@@ -12,36 +12,50 @@ import CoreData
 
 class DataContainer {
     
-    var app: AppDelegate;
-    var data: [StoryModel]?;
+    static let sharedInstance: DataContainer = {
+        return DataContainer().load()
+    }()
+    static let testInstance: DataContainer = {
+        return DataContainer().loadTestDatabase()
+    }()
+    
+    var data: [StoryModel] = [];
     var selectedStory: StoryModel?;
     
-    init( from : AppDelegate) {
-        app = from;
+    private init() {
     }
     
-    func load() {
+    public func load() -> DataContainer {
         self.initializeDatabase()
-        if (data?.count == 0) {
+        if (data.count == 0) {
             self.loadTestDatabase()
-            self.initializeDatabase()
+        }
+        return self
+    }
+    
+    func readFromFile(name: String) -> String {
+        let path = Bundle.main.path(forResource: name, ofType: "txt")
+        do {
+            return try String(contentsOfFile: path!)
+        } catch {
+            print(error)
+            return "fehler"
         }
     }
+
     
-    func save(story: StoryModel) {
-        
+    func createNewStory( name: String, file: String, points: Int16) {
+        self.createNewStory(name: name, text: readFromFile(name: file), points: points)
     }
     
-    
     func createNewStory( name: String, text: String, points: Int16) {
-        let entityDescription = NSEntityDescription.entity(forEntityName: "Story", in: managedObjectContext)
-        
-        let newStory = NSManagedObject(entity: entityDescription!, insertInto: managedObjectContext)
-        newStory.setValue(name, forKey: "Title");
-        newStory.setValue(text, forKey: "Text");
-        newStory.setValue(points, forKey: "points")
+        let newStory:StoryModel = StoryModel(context: managedObjectContext)
+        newStory.title = name
+        newStory.text = text
+        newStory.points = points
         
         do {
+            self.data.append(newStory)
             try newStory.managedObjectContext?.save()
         } catch {
             print(error)
@@ -49,9 +63,20 @@ class DataContainer {
         
     }
     
-    func loadTestDatabase() {
-        self.createNewStory(name: "Kleine Hexe", text: "Das ist die kleine Hexe und das ist eine schöne Geschichte", points: 7)
-        self.createNewStory(name: "Das schwarze Gespenst", text: "Ich bin das schwarze Gespenst und niemand hat vor mir Angst", points: 22)
+    
+    func loadTestDatabase() -> DataContainer {
+        self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe", points: 0)
+        self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst", points: 0)
+        self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter", points: 0)
+        return self
+    }
+    
+    func reloadTestDatabase() {
+        for story in self.data {
+            story.delete()
+        }
+        self.data = []
+        self.loadTestDatabase()
     }
     
     func initializeDatabase() {
@@ -66,7 +91,7 @@ class DataContainer {
         
         do {
             self.data = try managedObjectContext.fetch(fetchRequest)
-            print(self.data)
+             print(self.data)
             
         } catch {
             let fetchError = error as NSError
@@ -75,7 +100,7 @@ class DataContainer {
     }
     
     func getStories() -> [StoryModel] {
-        return self.data!
+        return self.data
     }
         
 }

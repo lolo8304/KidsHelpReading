@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "GameModel.updatePoints(point : Int16) -&gt; ():GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.points">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TimeModel.doneStep() -&gt; ():GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.seconds">
+            </PersistentString>
+            <PersistentString
+               value = "self.game">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StoryModelTests.testStoryGameStart() -&gt; ():StoryModelTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.story.games?.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.story.points">
+            </PersistentString>
+            <PersistentString
+               value = "self.story">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
