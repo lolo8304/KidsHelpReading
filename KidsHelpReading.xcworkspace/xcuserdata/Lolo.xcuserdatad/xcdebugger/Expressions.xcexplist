@@ -35,5 +35,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "TimeModel.csvRow() -&gt; String:GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.game!.story">
+            </PersistentString>
+            <PersistentString
+               value = "self.game">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

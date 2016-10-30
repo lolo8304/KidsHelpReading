@@ -103,6 +103,12 @@ class DataContainer {
         }
     }
     
+    func resetTimes() {
+        for story: StoryModel in self.getStories() {
+            story.resetTimes()
+        }
+    }
+    
     func getStories() -> [StoryModel] {
         return self.data
     }

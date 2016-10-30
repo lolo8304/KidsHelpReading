@@ -119,7 +119,7 @@ extension StoryModel {
     func newGame() -> GameModel {
         let newGame: GameModel = GameModel(context: managedObjectContext!)
         self.addToGames(newGame)
-        self.allWords
+        newGame.story = self
         return newGame
     }
     func lastGame() -> GameModel {
@@ -127,6 +127,23 @@ extension StoryModel {
     }
     func updatePoints(point: Int16) {
         self.points = point
+    }
+    
+    func resetTimes() {
+        self.games?.enumerateObjects({ (elem, idx, stop) -> Void in
+            (elem as! GameModel).delete()
+            self.removeFromGames(elem as! GameModel)
+        })
+        self.points = 0
+    }
+    
+    func addTimesTo( export: Array<TimeModel>) -> Array<TimeModel> {
+        var export = export
+        self.games?.enumerateObjects({ (elem, idx, stop) -> Void in
+            export = (elem as! GameModel).addTimesTo(export: export)
+            self.removeFromGames(elem as! GameModel)
+        })
+        return export
     }
     
 }
@@ -191,6 +208,7 @@ extension GameModel {
         let timer: TimeModel = TimeModel(context: managedObjectContext!)
         timer.initStep()
         self.addToTimes(timer)
+        timer.game = self
         return timer
     }
     func updatePoints(point: Int16) {
@@ -209,6 +227,15 @@ extension GameModel {
     func isStopped() -> Bool {
         return !self.isStarted()
     }
+
+    func addTimesTo( export: Array<TimeModel>) -> Array<TimeModel> {
+        var export = export
+        self.times?.enumerateObjects({ (elem, idx, stop) -> Void in
+            export.append(elem as! TimeModel)
+        })
+        return export
+    }
+
 }
 
 extension TimeModel {
@@ -250,6 +277,13 @@ extension TimeModel {
     }
     func cheated() {
         self.cheatmode = true
+    }
+    
+    func csvHeaderRow() -> String {
+        return "title, countWords, word, seconds, point, startTime\n"
+    }
+    func csvRow(story: StoryModel) -> String {
+        return "\(story.title!), \(story.countWords), \(self.word!), \(self.seconds), \(self.point), \(self.startTime!)\n"
     }
 
 }

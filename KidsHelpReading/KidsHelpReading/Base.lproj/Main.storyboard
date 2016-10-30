@@ -342,7 +342,7 @@
             </objects>
             <point key="canvasLocation" x="653.90625" y="373.4375"/>
         </scene>
-        <!--settings-->
+        <!--Einstellungen-->
         <scene sceneID="lAK-dP-auC">
             <objects>
                 <viewController id="PQY-Is-8dp" customClass="SettingsViewController" customModule="KidsHelpReading" customModuleProvider="target" sceneMemberID="viewController">
@@ -354,19 +354,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWN-NO-gRC">
-                                <rect key="frame" x="20" y="72" width="111" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Reset"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NWN-NO-gRC">
+                                <rect key="frame" x="20" y="84" width="200" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="thm-5s-vFV"/>
+                                    <constraint firstAttribute="width" constant="200" id="vdQ-cr-u5j"/>
+                                </constraints>
+                                <state key="normal" title="Reset data">
+                                    <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="reset:" destination="PQY-Is-8dp" eventType="touchUpInside" id="hhd-OC-uhH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtg-UR-fVb">
+                                <rect key="frame" x="245" y="84" width="200" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="GrE-hT-S9o"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="mOV-c1-Dz7"/>
+                                    <constraint firstAttribute="height" constant="40" id="oSN-Jh-nSz"/>
+                                    <constraint firstAttribute="width" constant="200" id="yZF-uU-1lt"/>
+                                </constraints>
+                                <state key="normal" title="Reset time">
+                                    <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetTime:" destination="PQY-Is-8dp" eventType="touchUpInside" id="vIi-CK-Xuh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NWN-NO-gRC" firstAttribute="leading" secondItem="i3n-fY-ul9" secondAttribute="leadingMargin" id="6LJ-mn-sXx"/>
+                            <constraint firstItem="NWN-NO-gRC" firstAttribute="top" secondItem="GLi-PZ-DEz" secondAttribute="bottom" constant="20" id="JmV-fc-Tgp"/>
+                            <constraint firstItem="Vtg-UR-fVb" firstAttribute="leading" secondItem="NWN-NO-gRC" secondAttribute="trailing" constant="25" id="PPW-OI-bT2"/>
+                            <constraint firstItem="Vtg-UR-fVb" firstAttribute="baseline" secondItem="NWN-NO-gRC" secondAttribute="baseline" id="bql-eW-Hq9"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="settings" image="settings" id="18a-uF-J6T"/>
+                    <navigationItem key="navigationItem" title="Einstellungen" id="Izi-il-YHX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="x8h-wm-YqF">
+                            <connections>
+                                <action selector="export:" destination="PQY-Is-8dp" id="2sp-JM-pru"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgQ-60-Gie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
