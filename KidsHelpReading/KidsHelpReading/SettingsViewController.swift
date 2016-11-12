@@ -10,8 +10,12 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var modeSegment: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setMode(mode: DataContainer.sharedInstance.mode.mode())
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,6 +25,26 @@ class SettingsViewController: UIViewController {
     }
 
     // MARK: navigation
+    
+    func setMode(mode: Int) {
+        self.modeSegment.selectedSegmentIndex = mode
+        self.modeChanged(self.modeSegment)
+    }
+    
+    @IBAction func modeChanged(_ sender: UISegmentedControl) {
+        if (sender.selectedSegmentIndex == 0) {
+            DataContainer.sharedInstance.setModeWord()
+        }
+        if (sender.selectedSegmentIndex == 1) {
+            DataContainer.sharedInstance.setModeWordBySentence()
+        }
+        if (sender.selectedSegmentIndex == 2) {
+            DataContainer.sharedInstance.setModeWordPrefixBySentence()
+        }
+        if (sender.selectedSegmentIndex == 3) {
+            DataContainer.sharedInstance.setModeSentence()
+        }
+    }
     
     @IBAction func reset(_ sender: Any) {
         DataContainer.sharedInstance.reloadTestDatabase()

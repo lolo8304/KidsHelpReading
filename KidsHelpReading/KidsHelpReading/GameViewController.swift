@@ -25,6 +25,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var textToReadLabel: UILabel!
     @IBOutlet weak var listenButton: UIButton!
+    @IBOutlet var listenAll: UIButton!
     
     @IBOutlet weak var displayTimeLabel: UILabel!
     
@@ -36,6 +37,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     var timer = Timer()
     var disableOKButtonTimer = Timer()
     var okButtonBackground: UIColor = UIColor.black
+    var isReadingAll: Bool = false
     
     private func storyProgress() -> Float {
         if (self.story.points == 0) { return 0.0 };
@@ -49,8 +51,68 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.progressLabel.text = "\(self.story.points)"
         self.updateWord()
     }
+    
+    func extractBracketsFrom(sentence: String) -> String {
+        let stringWord = sentence
+        let word:NSString = NSString(string: stringWord)
+        let lowerVariableRange = word.range(of: "{{")
+        if (lowerVariableRange != nil) {
+            /* remove {{ and }} */
+            let lower = stringWord.range(of: "{{")
+            let upperVariableRange = word.range(of: "}}")
+            let upper = stringWord.range(of: "}}")
+            
+            let start = stringWord.substring(to: (lower?.lowerBound)!)
+            let middleIndex = stringWord.index((lower?.lowerBound)!, offsetBy: 2)
+            let middle = stringWord.substring(with: middleIndex..<(upper?.lowerBound)!)
+            return middle;
+        } else {
+            return stringWord;
+        }
+    }
+    
+    func extractRawFrom(sentence: String) -> String {
+        return sentence.replacingOccurrences(of: "{{", with: "").replacingOccurrences(of: "}}", with: "")
+    }
+    
+    
     func updateWord() {
-        self.textToReadLabel.text = "\(self.story.word())"
+        
+        let stringWord = self.story.word()
+        let word:NSString = NSString(string: stringWord)
+        let lowerVariableRange = word.range(of: "{{")
+        if (lowerVariableRange.length > 0) {
+            
+            /* remove {{ and }} */
+            let lower = stringWord.range(of: "{{")
+            let upperVariableRange = word.range(of: "}}")
+            let upper = stringWord.range(of: "}}")
+            
+            let start = stringWord.substring(to: (lower?.lowerBound)!)
+            let middleIndex = stringWord.index((lower?.lowerBound)!, offsetBy: 2)
+            let middle = stringWord.substring(with: middleIndex..<(upper?.lowerBound)!)
+            let end = stringWord.substring(from: (upper?.upperBound)!)
+            
+            let myWord = "\(start)\(middle)\(end)"
+            let myString = NSMutableAttributedString(string: myWord)
+            
+            let myRange = NSRange(location: lowerVariableRange.location, length: (upperVariableRange.location - lowerVariableRange.location - lowerVariableRange.length))
+            myString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellow , range: myRange)
+            self.textToReadLabel.attributedText = myString
+        } else {
+            self.textToReadLabel.text = "\(word)"
+        }
+        
+        if (self.story.points >= 5) {
+            self.listenAll.isEnabled = true
+        } else {
+            self.listenAll.isEnabled = false
+        }
+        if (self.story.points >= 1) {
+            self.listenButton.isEnabled = true
+        } else {
+            self.listenButton.isEnabled = false
+        }
     }
 
     
@@ -109,17 +171,25 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     
     
     // MARK: speech
-        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        self.listenButton.alpha = 1.0
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         self.okButton.isEnabled = true
         self.stopButton.isEnabled = true
         self.weiterButton.isEnabled = true
-        self.story.lastGame().lastTimer().cheated()
-        self.next(self.okButton)
-
-        
+        if (!self.isReadingAll) {
+            self.story.lastGame().lastTimer().cheated()
+            self.next(self.okButton)
+            self.listenButton.alpha = 1.0
+            self.listenButton.isEnabled = true
+        } else {
+            self.listenAll.alpha = 1.0
+            self.story.lastGame().lastTimer().cheated5()
+            self.next(self.okButton)
+            self.isReadingAll = false
+        }
     }
     
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+    }
     
     // MARK: navigation
     
@@ -154,16 +224,42 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     }
 
     @IBAction func listen(_ sender: UIButton) {
+        self.isReadingAll = false
         self.listenButton.alpha = 0.2
+        self.listenButton.isEnabled = false
+
         self.okButton.isEnabled = false
         self.stopButton.isEnabled = false
         self.weiterButton.isEnabled = false
-
+        
         if !speechSynthesizer.isSpeaking {
             self.listenButton.isEnabled = false
-            let speechUtterance = AVSpeechUtterance (string: self.story.word())
+            self.listenAll.isEnabled = false
+            let speechUtterance = AVSpeechUtterance (string: self.extractBracketsFrom(sentence: self.story.word()))
+            speechUtterance.rate = 0.4
+            speechUtterance.pitchMultiplier = 1.0
+
             speechSynthesizer.speak(speechUtterance)
-            self.listenButton.isEnabled = true
+        } else {
+            speechSynthesizer.continueSpeaking()
+        }
+    }
+    @IBAction func listenAll(_ sender: UIButton) {
+        self.isReadingAll = true
+        self.listenAll.alpha = 0.2
+        self.listenAll.isEnabled = false
+        
+        self.okButton.isEnabled = false
+        self.stopButton.isEnabled = false
+        self.weiterButton.isEnabled = false
+        
+        if !speechSynthesizer.isSpeaking {
+            self.listenAll.isEnabled = false
+            let speechUtterance = AVSpeechUtterance (string: self.extractRawFrom(sentence: self.story.word()))
+            speechUtterance.rate = 0.4
+            speechUtterance.pitchMultiplier = 1.0
+
+            speechSynthesizer.speak(speechUtterance)
         } else {
             speechSynthesizer.continueSpeaking()
         }

@@ -75,18 +75,21 @@ extension StoryModel {
     func start() -> GameModel {
         self.newGame().start()
         self.points = 0
-        DataContainer.sharedInstance.setModeWordBySentence().start(story: self)
+        DataContainer.sharedInstance.mode.start(story: self)
         return self.lastGame()
     }
     func word() -> String {
         return self.lastGame().word()
+    }
+    func lastWord() -> String {
+        return self.lastGame().lastWord()
     }
     func next() {
         self.lastGame().next()
         DataContainer.sharedInstance.mode.next(story: self)
     }
     func skip() {
-        self.lastGame().skip().word = allWords.randomElement
+        DataContainer.sharedInstance.mode.next(story: self)
     }
     func stop() {
         self.lastGame().stop()
@@ -168,6 +171,14 @@ extension GameModel {
     func word() -> String {
         return self.lastTimer().word!
     }
+    func lastWord() -> String {
+        let lastTimer : TimeModel? = self.beforeLastTimer()
+        if (lastTimer != nil) {
+            return (self.beforeLastTimer()?.word!)!
+        } else {
+            return ""
+        }
+    }
     
     func save() {
         do {
@@ -218,6 +229,12 @@ extension GameModel {
     func lastTimer() -> TimeModel {
         return self.times!.lastObject as! TimeModel
     }
+    func beforeLastTimer() -> TimeModel? {
+        if (self.times!.count > 1) {
+            return (self.times![(self.times?.count)!-2] as! TimeModel)
+        }
+        return nil
+    }
     func isDone() -> Bool {
         return self.isStopped() || self.points >= 30
     }
@@ -241,9 +258,7 @@ extension GameModel {
 extension TimeModel {
     func doneStep() {
         if (self.cheatmode) {
-            self.point = -1
-        } else {
-            self.point = 1
+            self.point = 0 - self.point
         }
         self.seconds = Int16(NSDate().timeIntervalSince(self.startTime as! Date))
         self.game!.updatePoints(point: self.point)
@@ -256,7 +271,7 @@ extension TimeModel {
         self.cheatmode = false
         self.startTime = NSDate()
         self.seconds = 0
-        self.point = 0
+        self.point = 1
     }
     
     func save() {
@@ -278,6 +293,10 @@ extension TimeModel {
     func cheated() {
         self.cheatmode = true
     }
+    func cheated5() {
+        self.cheatmode = true
+        self.point = 5
+    }
     
     func csvHeaderRow() -> String {
         return "title, countWords, word, seconds, point, startTime\n"
@@ -298,6 +317,9 @@ class GameMode {
     func next(story: StoryModel) -> String {
         return "no-game-mode";
     }
+    func mode() -> Int {
+        return -1;
+    }
 }
 
 
@@ -312,13 +334,17 @@ class GameModeWord: GameMode {
         return word
     }
     override func next(story: StoryModel) -> String {
-        let old: String = story.lastGame().lastTimer().word!
+        let old: String = story.lastWord()
         self.wordIndex = story.allWords.randomElementIndex
         let new: String = story.allWords[self.wordIndex]
         if (story.allWords.count > 1 && new == old) { return self.next(story: story) }
         story.lastGame().lastTimer().word = new
         return new
     }
+    override func mode() -> Int {
+        return 0;
+    }
+
 }
 
 
@@ -351,6 +377,10 @@ class GameModeWordBySentence: GameMode {
         return word
         
     }
+    override func mode() -> Int {
+        return 1;
+    }
+
 }
 
 class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
@@ -358,13 +388,17 @@ class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
     func buildWordPrefixSuffix(story: StoryModel, w: String) -> String {
         let wordsBySentences: [[String]] = story.allWordsbySentences
         var word: String = w
-        if (self.wordIndex > 0) {
-            let prefix = wordsBySentences[self.sentenceIndex][self.wordIndex-1]
-            word = "(\(prefix))     \(word)"
-        }
-        if (self.wordIndex + 1 < story.allWords.count) {
-            let suffix = wordsBySentences[self.sentenceIndex][self.wordIndex+1]
-            word = "\(word)     (\(suffix))"
+        let wordsThisSentence: [String] = wordsBySentences[self.sentenceIndex]
+        if (self.wordIndex > 0 && (self.wordIndex + 1 < wordsThisSentence.count)) {
+            let prefix = wordsThisSentence[self.wordIndex-1]
+            let suffix1 = wordsThisSentence[self.wordIndex+1]
+            word = "\(prefix) {{\(word)}} \(suffix1)"
+        } else if (self.wordIndex > 0) {
+            let prefix = wordsThisSentence[self.wordIndex-1]
+            word = "\(prefix) {{\(word)}}"
+        } else if (self.wordIndex + 1 < wordsThisSentence.count) {
+            let suffix2 = wordsThisSentence[self.wordIndex+1]
+            word = "{{\(word)}} \(suffix2)"
         }
         return word
     }
@@ -380,5 +414,49 @@ class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
         story.lastGame().lastTimer().word = word
         return word
     }
+    override func mode() -> Int {
+        return 2;
+    }
+
+}
+
+
+class GameModeWordFullSentence: GameModeWordBySentence {
+
+    var wordPosition: String.Index = "".index("".startIndex, offsetBy: 0)
+    
+    func buildWordPrefixSuffix(story: StoryModel, w: String) -> String {
+        if (self.wordIndex == 0) {
+            self.wordPosition = "".index("".startIndex, offsetBy: 0)
+        }
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        let allSentences: [String] = story.allSentences
+        let sentence: String = allSentences[self.sentenceIndex]
+        
+        let selectedWord = wordsBySentences[self.sentenceIndex][self.wordIndex] // word
+        let startSentence = sentence.substring(to: self.wordPosition) // before word
+        let wordAndEndSentence: String = sentence.substring(from: self.wordPosition) // endstring with word
+        let wordRange = wordAndEndSentence.range(of: selectedWord)
+        let prefix = wordAndEndSentence.substring(to: wordRange!.lowerBound)
+        let endSentence = wordAndEndSentence.substring(from: (wordRange!.upperBound)) // after word
+        self.wordPosition = "\(startSentence)\(prefix)\(selectedWord)".endIndex
+        return "\(startSentence)\(prefix){{\(selectedWord)}}\(endSentence)";
+    }
+    override func start(story: StoryModel) -> String {
+        var word: String = super.start(story: story)
+        word = self.buildWordPrefixSuffix(story: story, w: word)
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+    override func next(story: StoryModel) -> String {
+        var word: String = super.next(story: story)
+        word = self.buildWordPrefixSuffix(story: story, w: word)
+        story.lastGame().lastTimer().word = word
+        return word
+    }
+    override func mode() -> Int {
+        return 3;
+    }
+    
 }
 

@@ -21,7 +21,7 @@ class DataContainer {
     
     var data: [StoryModel] = [];
     var selectedStory: StoryModel?;
-    var mode: GameMode = GameModeWord();
+    var mode: GameMode = GameModeWordFullSentence()
     
     private init() {
     }
@@ -70,7 +70,6 @@ class DataContainer {
         self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe")
         self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst")
         self.createNewStory(name: "Beast quest", file: "Text.Beast Quest")
-        
         self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter")
         return self
     }
@@ -116,6 +115,10 @@ class DataContainer {
     
     func setModeWord() -> GameMode {
         self.mode = GameModeWord()
+        return self.mode
+    }
+    func setModeSentence() -> GameMode {
+        self.mode = GameModeWordFullSentence()
         return self.mode
     }
     func setModeWordBySentence() -> GameMode {
