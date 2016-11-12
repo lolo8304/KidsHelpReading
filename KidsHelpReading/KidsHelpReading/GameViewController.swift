@@ -177,14 +177,13 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.weiterButton.isEnabled = true
         if (!self.isReadingAll) {
             self.story.lastGame().lastTimer().cheated()
-            self.next(self.okButton)
             self.listenButton.alpha = 1.0
-            self.listenButton.isEnabled = true
+            self.next(self.okButton)
         } else {
+            self.isReadingAll = false
             self.listenAll.alpha = 1.0
             self.story.lastGame().lastTimer().cheated5()
             self.next(self.okButton)
-            self.isReadingAll = false
         }
     }
     
@@ -210,7 +209,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.okButton.backgroundColor = self.stopButton.backgroundColor
         
         let aSelector : Selector = "enableOKButtonDelayed"
-        disableOKButtonTimer = Timer.scheduledTimer(timeInterval: 0.50, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        disableOKButtonTimer = Timer.scheduledTimer(timeInterval: 0.40, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
         self.story.next()
         self.updateProgressBar()

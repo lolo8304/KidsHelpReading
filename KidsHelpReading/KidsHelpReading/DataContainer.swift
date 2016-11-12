@@ -69,8 +69,9 @@ class DataContainer {
     func loadTestDatabase() -> DataContainer {
         self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe")
         self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst")
-        self.createNewStory(name: "Beast quest", file: "Text.Beast Quest")
-        self.createNewStory(name: "Yannicks Wörter", file: "Text.Yannicks Wörter")
+        self.createNewStory(name: "Die 3 ? Kids - Panik im Paradies", file: "Text.DieDreiFrageZeichenKids.PanikImParadies")
+        self.createNewStory(name: "Die Teufelskicker - Eine knallharte Saison", file: "Text.Die Teufelskicker Eine knallharte Saison")
+        self.createNewStory(name: "Beast Quest - Arachnid, Meister der Spinnen", file: "Text.Beast Quest - Arachnid, Meister der Spinnen")
         return self
     }
     
