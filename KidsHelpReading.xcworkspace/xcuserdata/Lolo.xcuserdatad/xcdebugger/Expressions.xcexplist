@@ -17,13 +17,13 @@
          contextName = "GameModeWordPrefixSuffixBySentence.buildWordPrefixSuffix(story : StoryModel, w : String) -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.wordIndex">
+            </PersistentString>
+            <PersistentString
                value = "story.allWords">
             </PersistentString>
             <PersistentString
                value = "wordsBySentences[self.sentenceIndex]">
-            </PersistentString>
-            <PersistentString
-               value = "self.wordIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -46,6 +46,14 @@
             </PersistentString>
             <PersistentString
                value = "self.game">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreatorViewController.performImageRecognition(image : UIImage) -&gt; ():CreatorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tesseract.recognizedText">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

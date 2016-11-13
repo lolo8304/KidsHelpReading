@@ -169,7 +169,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6U-AQ-mvf">
                                 <rect key="frame" x="20" y="208" width="984" height="477"/>
-                                <color key="backgroundColor" red="0.80462545156478882" green="0.95012873411178589" blue="0.81050640344619751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.44119651845637586" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="477" id="nKr-8Q-M0b"/>
@@ -177,16 +177,19 @@
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="40"/>
                                 <color key="textColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="D6i-uz-QId" appends="YES" id="J0R-qa-1Yr"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yic-Tq-1qd">
-                                <rect key="frame" x="449" y="623" width="126" height="48"/>
+                                <rect key="frame" x="511.5" y="670" width="1" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="126" id="hlT-8a-02B"/>
-                                    <constraint firstAttribute="height" constant="48" id="vxs-qy-40W"/>
+                                    <constraint firstAttribute="width" constant="1" id="hlT-8a-02B"/>
+                                    <constraint firstAttribute="height" constant="1" id="vxs-qy-40W"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="OK">
+                                <state key="normal">
                                     <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -288,6 +291,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="displayTimeLabel" destination="O7c-AV-Tcw" id="dqn-Zf-Nzb"/>
+                        <outlet property="gestureTap" destination="D6i-uz-QId" id="BZR-oT-G1m"/>
                         <outlet property="listenAll" destination="meK-BB-gn6" id="t8R-6J-kVV"/>
                         <outlet property="listenButton" destination="pSK-LD-F0C" id="HGV-m3-f8v"/>
                         <outlet property="maxLabel" destination="2h9-Rl-Ima" id="Bm9-ha-rER"/>
@@ -301,6 +305,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ird-2N-Xhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="D6i-uz-QId">
+                    <connections>
+                        <action selector="tapped:" destination="cjQ-tO-qRY" id="jHL-Vu-5fo"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2024.9999999999998" y="-321.09375"/>
         </scene>
@@ -332,30 +341,46 @@
                                     <constraint firstAttribute="height" constant="287" id="fSg-KU-xcl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="yes" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dCV-Ut-Geu">
+                                <rect key="frame" x="20" y="429" width="954" height="319"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="dCV-Ut-Geu" firstAttribute="top" secondItem="nlt-HV-XqV" secondAttribute="bottom" constant="8" symbolic="YES" id="79C-nZ-631"/>
                             <constraint firstItem="nlt-HV-XqV" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="Bsv-w3-5kK"/>
+                            <constraint firstAttribute="bottom" secondItem="dCV-Ut-Geu" secondAttribute="bottom" constant="20" symbolic="YES" id="DLn-mH-yNu"/>
                             <constraint firstItem="nlt-HV-XqV" firstAttribute="top" secondItem="ILn-yT-4FB" secondAttribute="bottom" constant="20" id="FmE-uC-E5l"/>
                             <constraint firstItem="ILn-yT-4FB" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="Jbx-Ef-01f"/>
+                            <constraint firstItem="dCV-Ut-Geu" firstAttribute="trailing" secondItem="nlt-HV-XqV" secondAttribute="trailing" id="TZj-Vd-oqC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ILn-yT-4FB" secondAttribute="trailing" id="iec-UG-N05"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nlt-HV-XqV" secondAttribute="trailing" constant="30" id="jvx-kL-Pre"/>
+                            <constraint firstItem="dCV-Ut-Geu" firstAttribute="leading" secondItem="nlt-HV-XqV" secondAttribute="leading" id="vSa-Uy-mlg"/>
                             <constraint firstItem="ILn-yT-4FB" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="20" id="zM1-CZ-xD9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="create" image="create" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" title="Geschichte hinzufügen" id="VmB-bO-Xgr">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="WBJ-yp-lna">
-                            <connections>
-                                <action selector="add:" destination="8rJ-Kc-sve" id="fN1-af-L8W"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="done" id="WBJ-yp-lna">
+                                <connections>
+                                    <action selector="add:" destination="8rJ-Kc-sve" id="fN1-af-L8W"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="wLL-ht-vew">
+                                <connections>
+                                    <action selector="capture:" destination="8rJ-Kc-sve" id="zpl-2v-YB7"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="image" destination="dCV-Ut-Geu" id="YDk-3D-Kz6"/>
                         <outlet property="textView" destination="nlt-HV-XqV" id="fh7-y2-B9o"/>
                         <outlet property="titleField" destination="ILn-yT-4FB" id="bzS-3U-4tf"/>
+                        <outlet property="topMarginConstraint" destination="zM1-CZ-xD9" id="idm-V5-t26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

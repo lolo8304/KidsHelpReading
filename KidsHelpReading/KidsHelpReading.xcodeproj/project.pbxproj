@@ -33,6 +33,10 @@
 		E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1B62E0C1DC2AF67009E2D98 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */; };
 		E1B62E961DC2C4B2009E2D98 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */; };
+		E1E717F11DD8967500C81A6A /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E717DA1DD8967500C81A6A /* TesseractOCR.framework */; };
+		E1E7180C1DD8977300C81A6A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E7180B1DD8977300C81A6A /* CoreImage.framework */; };
+		E1E7180E1DD8978E00C81A6A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E7180D1DD8978E00C81A6A /* libstdc++.6.0.9.tbd */; };
+		E1FD44F81DD8B0E400258A83 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = E1FD44F71DD8B0E400258A83 /* tessdata */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +76,11 @@
 		E1B62E091DC2A8F2009E2D98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
+		E1E717DA1DD8967500C81A6A /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = KidsHelpReading/TesseractOCR.framework; sourceTree = "<group>"; };
+		E1E7180B1DD8977300C81A6A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		E1E7180D1DD8978E00C81A6A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		E1E7180F1DD8985E00C81A6A /* KidsHelpReading-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KidsHelpReading-Bridging-Header.h"; sourceTree = "<group>"; };
+		E1FD44F71DD8B0E400258A83 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tessdata; path = KidsHelpReading/tessdata; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +95,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E7180E1DD8978E00C81A6A /* libstdc++.6.0.9.tbd in Frameworks */,
+				E1E717F11DD8967500C81A6A /* TesseractOCR.framework in Frameworks */,
 				E1B62E0C1DC2AF67009E2D98 /* CoreData.framework in Frameworks */,
+				E1E7180C1DD8977300C81A6A /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +148,7 @@
 				E19CA4491DC28DF3000C6C7C /* LaunchScreen.storyboard */,
 				E19CA44C1DC28DF3000C6C7C /* Info.plist */,
 				E19CA4531DC29138000C6C7C /* Credits.rtf */,
+				E1E7180F1DD8985E00C81A6A /* KidsHelpReading-Bridging-Header.h */,
 			);
 			path = KidsHelpReading;
 			sourceTree = "<group>";
@@ -176,6 +189,10 @@
 		E1B62E031DC2A7E2009E2D98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1FD44F71DD8B0E400258A83 /* tessdata */,
+				E1E7180D1DD8978E00C81A6A /* libstdc++.6.0.9.tbd */,
+				E1E7180B1DD8977300C81A6A /* CoreImage.framework */,
+				E1E717DA1DD8967500C81A6A /* TesseractOCR.framework */,
 				E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */,
 			);
 			name = Frameworks;
@@ -238,6 +255,7 @@
 					E19CA43A1DC28DF3000C6C7C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = W3U24WE3R3;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -281,6 +299,7 @@
 				E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */,
 				E19CA44B1DC28DF3000C6C7C /* LaunchScreen.storyboard in Resources */,
 				E19CA4481DC28DF3000C6C7C /* Assets.xcassets in Resources */,
+				E1FD44F81DD8B0E400258A83 /* tessdata in Resources */,
 				E1ABF0831DC5978E00DC42EB /* Text.Die Kleine Hexe.txt in Resources */,
 				E10430CC1DD780EE00BA83D5 /* Text.DieDreiFrageZeichenKids.PanikImParadies.txt in Resources */,
 				E10430CE1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt in Resources */,
@@ -482,14 +501,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W3U24WE3R3;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KidsHelpReading",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KidsHelpReading/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "KidsHelpReading/KidsHelpReading-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -497,14 +528,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = W3U24WE3R3;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KidsHelpReading",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KidsHelpReading/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "KidsHelpReading/KidsHelpReading-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

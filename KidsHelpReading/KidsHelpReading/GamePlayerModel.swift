@@ -320,6 +320,10 @@ class GameMode {
     func mode() -> Int {
         return -1;
     }
+    
+    func isDone(story: StoryModel) -> Bool {
+        return false
+    }
 }
 
 
@@ -344,6 +348,11 @@ class GameModeWord: GameMode {
     override func mode() -> Int {
         return 0;
     }
+    
+    override func isDone(story: StoryModel) -> Bool {
+        return false
+    }
+
 
 }
 
@@ -380,11 +389,16 @@ class GameModeWordBySentence: GameMode {
     override func mode() -> Int {
         return 1;
     }
+    
+    override func isDone(story: StoryModel) -> Bool {
+        return false
+    }
+
 
 }
 
 class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
-    
+
     func buildWordPrefixSuffix(story: StoryModel, w: String) -> String {
         let wordsBySentences: [[String]] = story.allWordsbySentences
         var word: String = w
@@ -417,6 +431,11 @@ class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
     override func mode() -> Int {
         return 2;
     }
+    override func isDone(story: StoryModel) -> Bool {
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        return self.wordIndex + 1 == wordsBySentences[self.sentenceIndex].count
+    }
+
 
 }
 
@@ -457,6 +476,11 @@ class GameModeWordFullSentence: GameModeWordBySentence {
     override func mode() -> Int {
         return 3;
     }
+    override func isDone(story: StoryModel) -> Bool {
+        let wordsBySentences: [[String]] = story.allWordsbySentences
+        return self.wordIndex + 1 == wordsBySentences[self.sentenceIndex].count
+    }
+
     
 }
 

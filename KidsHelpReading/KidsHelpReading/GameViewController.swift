@@ -32,7 +32,9 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var weiterButton: UIButton!
-    
+        
+    @IBOutlet var gestureTap: UITapGestureRecognizer!
+
     let speechSynthesizer = AVSpeechSynthesizer()
     var timer = Timer()
     var disableOKButtonTimer = Timer()
@@ -102,7 +104,11 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         } else {
             self.textToReadLabel.text = "\(word)"
         }
-        
+
+        self.listenAll.isEnabled = true
+        self.listenButton.isEnabled = true
+
+        /*
         if (self.story.points >= 5) {
             self.listenAll.isEnabled = true
         } else {
@@ -113,6 +119,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         } else {
             self.listenButton.isEnabled = false
         }
+         */
     }
 
     
@@ -142,6 +149,14 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.updateProgressBar()
         let aSelector : Selector = "updateTime"
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+        
+        
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        singleTap.numberOfTapsRequired = 1
+        singleTap.numberOfTouchesRequired = 1
+        self.textToReadLabel.addGestureRecognizer(singleTap)
+        self.textToReadLabel.isUserInteractionEnabled = true
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -175,24 +190,32 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.okButton.isEnabled = true
         self.stopButton.isEnabled = true
         self.weiterButton.isEnabled = true
+        self.listenButton.isEnabled = true
+        self.listenAll.isEnabled = true
+
         if (!self.isReadingAll) {
             self.story.lastGame().lastTimer().cheated()
             self.listenButton.alpha = 1.0
-            self.next(self.okButton)
+            //self.next(self.okButton)
         } else {
             self.isReadingAll = false
             self.listenAll.alpha = 1.0
             self.story.lastGame().lastTimer().cheated5()
-            self.next(self.okButton)
+            //self.next(self.okButton)
         }
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
     }
     
+    
+    func isDone() -> Bool {
+        return (self.story.lastGame().isDone() && DataContainer.sharedInstance.mode.isDone(story: self.story))
+    }
+    
     // MARK: navigation
     
-    @IBAction func stop(_ sender: UIButton) {
+    @IBAction func stop(_ sender: Any) {
         timer.invalidate()
         self.story.stop()
         self.updateProgressBar()
@@ -203,7 +226,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.okButton.isEnabled = false
         self.okButton.isHidden = true
     }
-    @IBAction func next(_ sender: UIButton) {
+    @IBAction func next(_ sender: Any) {
         self.okButton.isEnabled = false
         self.okButtonBackground = self.okButton.backgroundColor!
         self.okButton.backgroundColor = self.stopButton.backgroundColor
@@ -213,10 +236,11 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         
         self.story.next()
         self.updateProgressBar()
-        if (self.story.lastGame().isDone()) {
+        if (self.isDone()) {
             self.stop(sender)
         }
     }
+    
     @IBAction func skip(_ sender: UIButton) {
         self.story.skip()
         self.updateProgressBar()
@@ -264,6 +288,13 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         }
     }
     
+    @IBAction func tapped(_ sender: UITapGestureRecognizer) {
+        if(sender.state == UIGestureRecognizerState.ended){
+            if (!self.isDone()) {
+                    self.next(sender)
+            }
+        }
+    }
     
 }
 
