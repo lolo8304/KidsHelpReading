@@ -10,7 +10,7 @@
 
 import UIKit
 
-class ReadViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ReadViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
@@ -69,7 +69,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     //3
     func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) 
+        let cell: UIStoryCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! UIStoryCollectionViewCell
         //cell.backgroundColor = UIColor.black
         
         let titleLabel = cell.contentView.viewWithTag(10) as? UILabel
@@ -77,10 +77,18 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let countGamesLabels = cell.contentView.viewWithTag(30) as? UILabel
         
         let story: StoryModel = self.stories[indexPath.item]
+        cell.story = story
+        
         titleLabel?.text = story.title
         pointCountLabel?.text = "\(story.points) pts"
         countGamesLabels?.text = "# \(story.games!.count)"
         
+        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+        let aSelector : Selector = #selector(ReadViewController.longPress(_:))
+        gesture.addTarget(self, action: aSelector)
+        gesture.delegate = self;
+        gesture.delaysTouchesBegan = true;
+        cell.addGestureRecognizer(gesture)
         
         return cell
     }
@@ -95,7 +103,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        _ = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         self.container.selectedStory = self.stories[indexPath.item]
         self.container.selectedStory?.start()
         performSegue(withIdentifier: "PlayGame", sender: nil)
@@ -106,9 +114,16 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.backgroundColor = UIColor.red
     }
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        _ = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         //cell.backgroundColor = self.standardColor
     }
     
+    @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+        if (sender.state == UIGestureRecognizerState.began) {
+            let cell: UIStoryCollectionViewCell = sender.view as! UIStoryCollectionViewCell
+            self.container.selectedStory = cell.story
+            performSegue(withIdentifier: "AddEditGame", sender: nil)
+        }
+    }
 }
 

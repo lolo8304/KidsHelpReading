@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreGraphics
+import UIKit
 
 
 private extension Array {
@@ -53,6 +55,35 @@ extension String {
         return sentences
     }
     
+    func fromBracketsToAttributes() -> NSAttributedString {
+        var ranges: [NSRange] = []
+        
+        var stringWord = self
+        var lowerVariableRange = NSMakeRange(0, 0)
+        repeat {
+            let word:NSString = NSString(string: stringWord)
+            lowerVariableRange = word.range(of: "{{")
+            if (lowerVariableRange.length > 0) {
+                /* remove {{ and }} */
+                let lower = stringWord.range(of: "{{")
+                let upperVariableRange = word.range(of: "}}")
+                let upper = stringWord.range(of: "}}")
+    
+                let start = stringWord.substring(to: (lower?.lowerBound)!)
+                let middleIndex = stringWord.index((lower?.lowerBound)!, offsetBy: 2)
+                let middle = stringWord.substring(with: middleIndex..<(upper?.lowerBound)!)
+                let end = stringWord.substring(from: (upper?.upperBound)!)
+                let myRange = NSRange(location: lowerVariableRange.location, length: (upperVariableRange.location - lowerVariableRange.location - lowerVariableRange.length))
+                ranges.append(myRange)
+                stringWord = "\(start)\(middle)\(end)"
+            }
+        } while ( lowerVariableRange.length > 0)
+        let myString = NSMutableAttributedString(string: stringWord)
+        for range in ranges {
+            myString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellow , range: range)
+        }
+        return myString
+    }
 }
 
 
@@ -72,11 +103,10 @@ extension StoryModel {
         return sentences
     }
     
-    func start() -> GameModel {
+    func start() {
         self.newGame().start()
         self.points = 0
         DataContainer.sharedInstance.mode.start(story: self)
-        return self.lastGame()
     }
     func word() -> String {
         return self.lastGame().word()
@@ -97,10 +127,10 @@ extension StoryModel {
     
     func save() {
         do {
-            try self.managedObjectContext?.save()
             self.games?.enumerateObjects({ (elem, idx, stop) -> Void in
                 (elem as! GameModel).save()
             })
+            try self.managedObjectContext?.save()
         } catch {
             print(error)
         }
@@ -112,6 +142,7 @@ extension StoryModel {
                 (elem as! GameModel).delete()
             })
             managedObjectContext?.delete(self)
+            try managedObjectContext?.save()
         } catch {
             print(error)
         }
@@ -192,15 +223,10 @@ extension GameModel {
         
     }
     func delete() {
-        do {
-            self.times?.enumerateObjects({ (elem, idx, stop) -> Void in
-                (elem as! TimeModel).delete()
-            })
-            managedObjectContext?.delete(self)
-        } catch {
-            print(error)
-        }
-        
+        self.times?.enumerateObjects({ (elem, idx, stop) -> Void in
+            (elem as! TimeModel).delete()
+        })
+        managedObjectContext?.delete(self)
     }
 
 
@@ -283,11 +309,8 @@ extension TimeModel {
         
     }
     func delete() {
-        do {
             managedObjectContext?.delete(self)
-        } catch {
-            print(error)
-        }
+
         
     }
     func cheated() {
@@ -359,9 +382,12 @@ class GameModeWord: GameMode {
 
 class GameModeWordBySentence: GameMode {
     
+    func nextSentenceIndex(_ sentences: Array<Any>) -> Int {
+        return sentences.randomElementIndex
+    }
     override func start(story: StoryModel) -> String {
         let wordsBySentences: [[String]] = story.allWordsbySentences
-        self.sentenceIndex = wordsBySentences.randomElementIndex
+        self.sentenceIndex = self.nextSentenceIndex(wordsBySentences)
         self.wordIndex = 0
         let word: String = wordsBySentences[self.sentenceIndex][self.wordIndex]
         story.lastGame().lastTimer().word = word
@@ -372,7 +398,7 @@ class GameModeWordBySentence: GameMode {
         var word: String = ""
         self.wordIndex += 1
         if (self.wordIndex == wordsBySentences[self.sentenceIndex].count) {
-            self.sentenceIndex = wordsBySentences.randomElementIndex
+            self.sentenceIndex = self.nextSentenceIndex(wordsBySentences)
             self.wordIndex = 0
             word = wordsBySentences[self.sentenceIndex][self.wordIndex]
         } else {
@@ -483,4 +509,15 @@ class GameModeWordFullSentence: GameModeWordBySentence {
 
     
 }
+
+class GameModeWordFullSentenceAfterSentence: GameModeWordFullSentence {
+    override func nextSentenceIndex(_ sentences: Array<Any>) -> Int {
+        return self.sentenceIndex + 1
+    }
+    override func mode() -> Int {
+        return 4;
+    }
+    
+}
+
 

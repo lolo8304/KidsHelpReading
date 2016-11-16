@@ -10,13 +10,26 @@ import Foundation
 import UIKit
 import CoreData
 
+
+extension Array where Element: Equatable {
+    
+    // Remove first collection element that is equal to the given `object`:
+    mutating func remove(object: Element) {
+        if let index = index(of: object) {
+            remove(at: index)
+        }
+    }
+}
+
 class DataContainer {
     
     static let sharedInstance: DataContainer = {
         return DataContainer().load()
     }()
     static let testInstance: DataContainer = {
-        return DataContainer().loadTestDatabase()
+        let container = DataContainer()
+        container.loadTestDatabase()
+        return container
     }()
     
     var data: [StoryModel] = [];
@@ -64,15 +77,18 @@ class DataContainer {
         }
         
     }
+    func deleteStory(story: StoryModel) {
+        story.delete()
+        self.data.remove(object: story)
+    }
     
     
-    func loadTestDatabase() -> DataContainer {
+    func loadTestDatabase() {
         self.createNewStory(name: "Die kleine Hexe", file: "Text.Die Kleine Hexe")
         self.createNewStory(name: "Das kleine Gespenst", file: "Text.Das kleine Gespenst")
         self.createNewStory(name: "Die 3 ? Kids - Panik im Paradies", file: "Text.DieDreiFrageZeichenKids.PanikImParadies")
         self.createNewStory(name: "Die Teufelskicker - Eine knallharte Saison", file: "Text.Die Teufelskicker Eine knallharte Saison")
         self.createNewStory(name: "Beast Quest - Arachnid, Meister der Spinnen", file: "Text.Beast Quest - Arachnid, Meister der Spinnen")
-        return self
     }
     
     func reloadTestDatabase() {
@@ -114,21 +130,20 @@ class DataContainer {
     }
     
     
-    func setModeWord() -> GameMode {
+    func setModeWord(){
         self.mode = GameModeWord()
-        return self.mode
     }
-    func setModeSentence() -> GameMode {
+    func setModeSentence() {
         self.mode = GameModeWordFullSentence()
-        return self.mode
     }
-    func setModeWordBySentence() -> GameMode {
+    func setModeSentenceAfterSentence() {
+        self.mode = GameModeWordFullSentenceAfterSentence()
+    }
+    func setModeWordBySentence() {
         self.mode = GameModeWordBySentence()
-        return self.mode
     }
-    func setModeWordPrefixBySentence() -> GameMode {
+    func setModeWordPrefixBySentence() {
         self.mode = GameModeWordPrefixSuffixBySentence()
-        return self.mode
     }
 
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E10430CC1DD780EE00BA83D5 /* Text.DieDreiFrageZeichenKids.PanikImParadies.txt in Resources */ = {isa = PBXBuildFile; fileRef = E10430CB1DD780EE00BA83D5 /* Text.DieDreiFrageZeichenKids.PanikImParadies.txt */; };
 		E10430CE1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt in Resources */ = {isa = PBXBuildFile; fileRef = E10430CD1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt */; };
+		E110FDE21DDA6333009F09DE /* UIStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */; };
 		E1152D1B1DC5508000C0083F /* StoryModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1152D1A1DC5508000C0083F /* StoryModelTests.swift */; };
 		E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AB1DC401D800E6F8DF /* GameViewController.swift */; };
 		E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */; };
@@ -52,6 +53,8 @@
 /* Begin PBXFileReference section */
 		E10430CB1DD780EE00BA83D5 /* Text.DieDreiFrageZeichenKids.PanikImParadies.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Text.DieDreiFrageZeichenKids.PanikImParadies.txt; sourceTree = "<group>"; };
 		E10430CD1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Die Teufelskicker Eine knallharte Saison.txt"; sourceTree = "<group>"; };
+		E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		E110FDE71DDCE967009F09DE /* KidsHelpReading.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KidsHelpReading.entitlements; sourceTree = "<group>"; };
 		E1152D1A1DC5508000C0083F /* StoryModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryModelTests.swift; sourceTree = "<group>"; };
 		E16988AB1DC401D800E6F8DF /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePlayerModel.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 		E19CA43D1DC28DF3000C6C7C /* KidsHelpReading */ = {
 			isa = PBXGroup;
 			children = (
+				E110FDE71DDCE967009F09DE /* KidsHelpReading.entitlements */,
 				E1ABF0811DC5975700DC42EB /* texte */,
 				E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */,
 				E1ABF08A1DC5DA6100DC42EB /* Model */,
@@ -182,6 +186,7 @@
 				E16988AB1DC401D800E6F8DF /* GameViewController.swift */,
 				E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */,
 				E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */,
+				E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -261,6 +266,9 @@
 							com.apple.GameCenter = {
 								enabled = 0;
 							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
 						};
 					};
 				};
@@ -333,6 +341,7 @@
 			files = (
 				E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */,
 				E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */,
+				E110FDE21DDA6333009F09DE /* UIStoryCollectionViewCell.swift in Sources */,
 				E19CA4431DC28DF3000C6C7C /* CreatorViewController.swift in Sources */,
 				E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */,
 				E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */,
@@ -514,7 +523,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lstdc++";
-				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kids-reading";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsHelpReading/KidsHelpReading-Bridging-Header.h";
@@ -541,7 +550,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lstdc++";
-				PRODUCT_BUNDLE_IDENTIFIER = ch.lolo.KidsHelpReading;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kids-reading";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsHelpReading/KidsHelpReading-Bridging-Header.h";

@@ -14,18 +14,32 @@ class CreatorViewController: UIViewController, UITextViewDelegate, UINavigationC
     var appDelegate:AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
+    var container:DataContainer {
+        return self.appDelegate.container!
+    }
     @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var image: UIImageView!
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     var activityIndicator:UIActivityIndicatorView!
     var originalTopMargin:CGFloat!
+    var story: StoryModel?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (self.container.selectedStory != nil) {
+            self.story = self.container.selectedStory!
+            self.titleField.text = self.story?.title
+            self.textView.text = self.story?.text
+            self.deleteButton.isEnabled = true
+        } else {
+            self.deleteButton.isEnabled = false
+            self.deleteButton.image = nil
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -54,10 +68,24 @@ class CreatorViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     // MARK: navigation
     @IBAction func add(_ sender: UIBarButtonItem) {
-        DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text)
+        if (self.container.selectedStory != nil) {
+            self.container.selectedStory?.title = self.titleField.text
+            self.container.selectedStory?.text = self.textView.text
+            self.container.selectedStory?.save()
+        } else {
+            DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text)
+        }
         self.navigationController?.popViewController(animated: true)
     }
-    
+
+    @IBAction func deleteItem(_ sender: UIBarButtonItem) {
+        if (self.container.selectedStory != nil) {
+            self.container.deleteStory(story: self.container.selectedStory!)
+            self.container.selectedStory = nil
+        }
+        self.navigationController?.popViewController(animated: true)
+    }
+
     @IBAction func capture(_ sender: UIBarButtonItem) {
         // 1
         view.endEditing(true)
@@ -164,12 +192,12 @@ extension CreatorViewController: UITextFieldDelegate {
         moveViewUp()
     }
     
-    func textFieldEndEditing(_ sender: AnyObject) {
+    private func textFieldEndEditing(_ sender: AnyObject) {
         view.endEditing(true)
         moveViewDown()
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    private func textViewDidBeginEditing(_ textView: UITextView) {
         moveViewDown()
     }
     
@@ -192,22 +220,41 @@ extension CreatorViewController: UITextFieldDelegate {
             textView.text.append((tesseract?.recognizedText)!)
         }
         textView.isEditable = true
+        textView.attributedText = spellChecker(string: textView.text).fromBracketsToAttributes()
         // 8
         removeActivityIndicator()
     }
     
-    /*
-    func spellChecker() {
+    func spellChecker(string: String) -> String {
+        
         let checker:UITextChecker = UITextChecker()
-        let checkRange: NSRange = NSMakeRange(0, countElements(textView.text))
+        var textToCheck = string
+        var index = 0
+        var misspelledRange: NSRange
+        repeat {
+            let text:NSString = textToCheck as NSString
+            let checkRange: NSRange = NSMakeRange(index, text.length-index)
+
+            misspelledRange = checker.rangeOfMisspelledWord(in: textToCheck,
+                                                            range: checkRange, startingAt: 0, wrap: false, language: "de_CH")
+            if misspelledRange.location != NSNotFound {
+                let arrGuessed = checker.guesses(forWordRange: misspelledRange, in: textToCheck, language: "de_CH")
+                if (arrGuessed != nil && !arrGuessed!.isEmpty) {
+                    let replacement = "{{\(arrGuessed!.first!)}}"
+                    let toReplace = text.substring(with: misspelledRange)
+                    print("replaced \(toReplace) -> \(replacement)")
         
-        let misspelledRange = checker.rangeOfMisspelledWord(in: textView.text,
-                                                            range: checkRange, startingAt: 0, wrap: true, language: "de_CH")
-        var arrGuessed = checker.guesses(forWordRange: misspelledRange, in: textView.text, language: "de_CH")!
-        
-        var correctedStr = textView.text.stringByReplacingCharactersInRange(misspelledRange, withString: arrGuessed.objectAtIndex(0))
+                    textToCheck = text.replacingCharacters(in: misspelledRange, with: replacement )
+                    index = misspelledRange.location + misspelledRange.length + ((replacement as NSString).length - misspelledRange.length)
+                    print("new index \(index)")
+                } else {
+                    index = misspelledRange.location + misspelledRange.length
+
+                }
+            }
+        } while (misspelledRange.location != NSNotFound)
+        return textToCheck
     }
- */
 }
 
 extension CreatorViewController: UIImagePickerControllerDelegate {

@@ -17,13 +17,13 @@
          contextName = "GameModeWordPrefixSuffixBySentence.buildWordPrefixSuffix(story : StoryModel, w : String) -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.wordIndex">
+               value = "wordsBySentences[self.sentenceIndex]">
             </PersistentString>
             <PersistentString
                value = "story.allWords">
             </PersistentString>
             <PersistentString
-               value = "wordsBySentences[self.sentenceIndex]">
+               value = "self.wordIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -39,6 +39,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CreatorViewController.performImageRecognition(image : UIImage) -&gt; ():CreatorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tesseract.recognizedText">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TimeModel.csvRow() -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
@@ -46,14 +54,6 @@
             </PersistentString>
             <PersistentString
                value = "self.game">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CreatorViewController.performImageRecognition(image : UIImage) -&gt; ():CreatorViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tesseract.recognizedText">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -86,6 +86,9 @@
                value = "story.lastGame().lastTimer().word">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ReadViewController.longPress(UILongPressGestureRecognizer) -&gt; ():ReadViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

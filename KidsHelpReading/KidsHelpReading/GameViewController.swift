@@ -58,13 +58,10 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         let stringWord = sentence
         let word:NSString = NSString(string: stringWord)
         let lowerVariableRange = word.range(of: "{{")
-        if (lowerVariableRange != nil) {
+        if (lowerVariableRange.length > 0) {
             /* remove {{ and }} */
             let lower = stringWord.range(of: "{{")
-            let upperVariableRange = word.range(of: "}}")
             let upper = stringWord.range(of: "}}")
-            
-            let start = stringWord.substring(to: (lower?.lowerBound)!)
             let middleIndex = stringWord.index((lower?.lowerBound)!, offsetBy: 2)
             let middle = stringWord.substring(with: middleIndex..<(upper?.lowerBound)!)
             return middle;
@@ -79,32 +76,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     
     
     func updateWord() {
-        
-        let stringWord = self.story.word()
-        let word:NSString = NSString(string: stringWord)
-        let lowerVariableRange = word.range(of: "{{")
-        if (lowerVariableRange.length > 0) {
-            
-            /* remove {{ and }} */
-            let lower = stringWord.range(of: "{{")
-            let upperVariableRange = word.range(of: "}}")
-            let upper = stringWord.range(of: "}}")
-            
-            let start = stringWord.substring(to: (lower?.lowerBound)!)
-            let middleIndex = stringWord.index((lower?.lowerBound)!, offsetBy: 2)
-            let middle = stringWord.substring(with: middleIndex..<(upper?.lowerBound)!)
-            let end = stringWord.substring(from: (upper?.upperBound)!)
-            
-            let myWord = "\(start)\(middle)\(end)"
-            let myString = NSMutableAttributedString(string: myWord)
-            
-            let myRange = NSRange(location: lowerVariableRange.location, length: (upperVariableRange.location - lowerVariableRange.location - lowerVariableRange.length))
-            myString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellow , range: myRange)
-            self.textToReadLabel.attributedText = myString
-        } else {
-            self.textToReadLabel.text = "\(word)"
-        }
-
+        self.textToReadLabel.attributedText = self.story.word().fromBracketsToAttributes()
         self.listenAll.isEnabled = true
         self.listenButton.isEnabled = true
 
@@ -147,12 +119,12 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         speechSynthesizer.delegate = self
 
         self.updateProgressBar()
-        let aSelector : Selector = "updateTime"
+        let aSelector : Selector = #selector(GameViewController.updateTime)
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
         
         
-        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapped:")
+        let singleTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(GameViewController.tapped(_:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
         self.textToReadLabel.addGestureRecognizer(singleTap)
@@ -162,7 +134,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let data: DataContainer? = appDelegate.container
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -231,7 +203,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         self.okButtonBackground = self.okButton.backgroundColor!
         self.okButton.backgroundColor = self.stopButton.backgroundColor
         
-        let aSelector : Selector = "enableOKButtonDelayed"
+        let aSelector : Selector = #selector(GameViewController.enableOKButtonDelayed)
         disableOKButtonTimer = Timer.scheduledTimer(timeInterval: 0.40, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
         self.story.next()

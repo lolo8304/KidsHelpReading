@@ -44,6 +44,9 @@ class SettingsViewController: UIViewController {
         if (sender.selectedSegmentIndex == 3) {
             DataContainer.sharedInstance.setModeSentence()
         }
+        if (sender.selectedSegmentIndex == 4) {
+            DataContainer.sharedInstance.setModeSentenceAfterSentence()
+        }
     }
     
     @IBAction func reset(_ sender: Any) {
