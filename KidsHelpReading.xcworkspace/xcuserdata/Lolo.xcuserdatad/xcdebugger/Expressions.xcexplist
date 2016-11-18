@@ -3,27 +3,35 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "TimeModel.doneStep() -&gt; ():GamePlayerModel.swift">
+         contextName = "StoryModelTests.testStoryGameStart() -&gt; ():StoryModelTests.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.seconds">
+               value = "self.story.games?.count">
             </PersistentString>
             <PersistentString
-               value = "self.game">
+               value = "self.story.points">
+            </PersistentString>
+            <PersistentString
+               value = "self.story">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameModeWordPrefixSuffixBySentence.buildWordPrefixSuffix(story : StoryModel, w : String) -&gt; String:GamePlayerModel.swift">
+         contextName = "GoogleImageSearch.(getFirstImage(onCompletion : (String, Int, Int, String) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "wordsBySentences[self.sentenceIndex]">
+               value = "json[&quot;items&quot;]">
             </PersistentString>
             <PersistentString
-               value = "story.allWords">
+               value = "self.results!.type == .null">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RestApiManager.(imageSearch(query : String, onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "self.wordIndex">
+               value = "json[&quot;items&quot;].type == .null">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -35,6 +43,44 @@
             </PersistentString>
             <PersistentString
                value = "selectedWord.utf8.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameModeWord.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "story.lastGame().lastTimer().word">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameModeWordPrefixSuffixBySentence.buildWordPrefixSuffix(story : StoryModel, w : String) -&gt; String:GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.wordIndex">
+            </PersistentString>
+            <PersistentString
+               value = "wordsBySentences[self.sentenceIndex]">
+            </PersistentString>
+            <PersistentString
+               value = "story.allWords">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GoogleImageSearch.(getImageData(onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json[&quot;items&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RestApiManager.(makeHTTPGetRequest(path : String, onCompletion : (JSON, Error?) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error.message()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -66,29 +112,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "StoryModelTests.testStoryGameStart() -&gt; ():StoryModelTests.swift">
+         contextName = "GameModeWordBySentence.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.story.games?.count">
-            </PersistentString>
-            <PersistentString
-               value = "self.story.points">
-            </PersistentString>
-            <PersistentString
-               value = "self.story">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameModeWord.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "story.lastGame().lastTimer().word">
+               value = "self.wordIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ReadViewController.longPress(UILongPressGestureRecognizer) -&gt; ():ReadViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TimeModel.doneStep() -&gt; ():GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.seconds">
+            </PersistentString>
+            <PersistentString
+               value = "self.game">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

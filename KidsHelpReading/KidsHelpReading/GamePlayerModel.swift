@@ -180,6 +180,30 @@ extension StoryModel {
         return export
     }
     
+    var google: GoogleImageSearch {
+        return GoogleImageSearch(query: self.title!)
+    }
+    
+    func randomUIImage(onCompletion: @escaping (String) -> Void) {
+        self.google.getFirstImage(onCompletion: { (url: String, height: Int, width: Int, mimeType: String) in
+                onCompletion(url)
+        })
+    }
+    
+    func firstUIImage(view: UIImageView) {
+        var localImage: UIImage? = self.title!.loadImage()
+        if (localImage != nil) {
+            DispatchQueue.main.async() { () -> Void in
+                view.image = localImage
+            }
+        } else {
+            self.randomUIImage(onCompletion: { (url: String) in
+                view.downloadedFrom(link: url, name: self.title!)
+            })
+        }
+
+    }
+    
 }
 
 extension GameModel {
@@ -381,6 +405,11 @@ class GameModeWord: GameMode {
 
 
 class GameModeWordBySentence: GameMode {
+    
+    public override init() {
+        super.init()
+        wordIndex = -1
+    }
     
     func nextSentenceIndex(_ sentences: Array<Any>) -> Int {
         return sentences.randomElementIndex

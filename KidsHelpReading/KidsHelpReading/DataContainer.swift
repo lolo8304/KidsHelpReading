@@ -33,7 +33,13 @@ class DataContainer {
     }()
     
     var data: [StoryModel] = [];
-    var selectedStory: StoryModel?;
+    var selectedStory: StoryModel? {
+        willSet(newStory) {
+            if (newStory != selectedStory) {
+                self.resetTimes()
+            }
+        }
+    }
     var mode: GameMode = GameModeWordFullSentence()
     
     private init() {
@@ -129,6 +135,26 @@ class DataContainer {
         return self.data
     }
     
+    func resetGameMode() {
+        self.resetGameMode(to: self.mode.mode())
+    }
+    func resetGameMode(to: Int) {
+        if (to == 0) {
+            DataContainer.sharedInstance.setModeWord()
+        }
+        if (to == 1) {
+            DataContainer.sharedInstance.setModeWordBySentence()
+        }
+        if (to == 2) {
+            DataContainer.sharedInstance.setModeWordPrefixBySentence()
+        }
+        if (to == 3) {
+            DataContainer.sharedInstance.setModeSentence()
+        }
+        if (to == 4) {
+            DataContainer.sharedInstance.setModeSentenceAfterSentence()
+        }
+    }
     
     func setModeWord(){
         self.mode = GameModeWord()

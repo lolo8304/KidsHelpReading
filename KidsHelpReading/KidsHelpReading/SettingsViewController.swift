@@ -32,21 +32,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func modeChanged(_ sender: UISegmentedControl) {
-        if (sender.selectedSegmentIndex == 0) {
-            DataContainer.sharedInstance.setModeWord()
-        }
-        if (sender.selectedSegmentIndex == 1) {
-            DataContainer.sharedInstance.setModeWordBySentence()
-        }
-        if (sender.selectedSegmentIndex == 2) {
-            DataContainer.sharedInstance.setModeWordPrefixBySentence()
-        }
-        if (sender.selectedSegmentIndex == 3) {
-            DataContainer.sharedInstance.setModeSentence()
-        }
-        if (sender.selectedSegmentIndex == 4) {
-            DataContainer.sharedInstance.setModeSentenceAfterSentence()
-        }
+        DataContainer.sharedInstance.resetGameMode(to: sender.selectedSegmentIndex)
     }
     
     @IBAction func reset(_ sender: Any) {

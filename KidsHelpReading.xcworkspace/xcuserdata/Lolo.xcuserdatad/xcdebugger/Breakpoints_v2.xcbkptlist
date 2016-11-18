@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/GamePlayerModel.swift"
-            timestampString = "501026844.926085"
+            filePath = "KidsHelpReading/KidsHelpReading/RestApiManager.swift"
+            timestampString = "501193695.156466"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "start(story:)"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "makeHTTPGetRequest(path:onCompletion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/GamePlayerModel.swift"
-            timestampString = "501026844.926085"
+            filePath = "KidsHelpReading/KidsHelpReading/RestApiManager.swift"
+            timestampString = "501193696.15264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "next()"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "makeHTTPGetRequest(path:onCompletion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "500853072.871033"
+            filePath = "KidsHelpReading/KidsHelpReading/RestApiManager.swift"
+            timestampString = "501199208.4604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "capture(_:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "getImageData(onCompletion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "500853072.871033"
+            filePath = "KidsHelpReading/KidsHelpReading/RestApiManager.swift"
+            timestampString = "501199375.053009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "moveViewDown()"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "getFirstImage(onCompletion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,29 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "500853072.871033"
+            filePath = "KidsHelpReading/KidsHelpReading/RestApiManager.swift"
+            timestampString = "501200237.633026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "capture(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "500853072.871033"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "capture(_:)"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "downloadedFrom(link:name:contentMode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,92 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KidsHelpReading/KidsHelpReading/ReadViewController.swift"
-            timestampString = "500851971.511245"
+            timestampString = "501202102.903563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "longPress(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/ReadViewController.swift"
-            timestampString = "500852211.717343"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "shouldPerformSegue(withIdentifier:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "500853122.969881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "deleteItem(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/GamePlayerModel.swift"
-            timestampString = "501026844.926085"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "delete()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/CreatorViewController.swift"
-            timestampString = "501020749.037222"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "spellChecker(string:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsHelpReading/KidsHelpReading/GamePlayerModel.swift"
-            timestampString = "501022822.293521"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "fromBracketsToAttributes()"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

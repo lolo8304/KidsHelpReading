@@ -32,6 +32,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var weiterButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
         
     @IBOutlet var gestureTap: UITapGestureRecognizer!
 
@@ -129,6 +130,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         singleTap.numberOfTouchesRequired = 1
         self.textToReadLabel.addGestureRecognizer(singleTap)
         self.textToReadLabel.isUserInteractionEnabled = true
+        self.story.firstUIImage(view: self.imageView)
         
         // Do any additional setup after loading the view, typically from a nib.
     }

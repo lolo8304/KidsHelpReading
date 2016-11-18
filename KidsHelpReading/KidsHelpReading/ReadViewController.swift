@@ -37,6 +37,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.container.selectedStory = nil
         self.storyCollectionView.delegate = self
         self.storyCollectionView.dataSource = self
         self.storyCollectionView.reloadData()
@@ -75,16 +76,19 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let titleLabel = cell.contentView.viewWithTag(10) as? UILabel
         let pointCountLabel = cell.contentView.viewWithTag(20) as? UILabel
         let countGamesLabels = cell.contentView.viewWithTag(30) as? UILabel
+        var imageView = cell.contentView.viewWithTag(50) as? UIImageView
         
-        let story: StoryModel = self.stories[indexPath.item]
+        var story: StoryModel = self.stories[indexPath.item]
         cell.story = story
         
         titleLabel?.text = story.title
         pointCountLabel?.text = "\(story.points) pts"
         countGamesLabels?.text = "# \(story.games!.count)"
         
-        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
-        let aSelector : Selector = #selector(ReadViewController.longPress(_:))
+        story.firstUIImage(view: imageView!)
+        
+        var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+        var aSelector : Selector = #selector(ReadViewController.longPress(_:))
         gesture.addTarget(self, action: aSelector)
         gesture.delegate = self;
         gesture.delaysTouchesBegan = true;

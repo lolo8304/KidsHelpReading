@@ -25,7 +25,6 @@
 		E19CA4541DC29138000C6C7C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E19CA4531DC29138000C6C7C /* Credits.rtf */; };
 		E1ABF07E1DC5546600DC42EB /* GenericTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ABF07D1DC5546600DC42EB /* GenericTestCase.swift */; };
 		E1ABF07F1DC5622300DC42EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
-		E1ABF0801DC5680000DC42EB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1ABF0831DC5978E00DC42EB /* Text.Die Kleine Hexe.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */; };
 		E1ABF0851DC5984E00DC42EB /* Text.Das kleine Gespenst.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */; };
 		E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */; };
@@ -34,6 +33,9 @@
 		E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1B62E0C1DC2AF67009E2D98 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */; };
 		E1B62E961DC2C4B2009E2D98 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */; };
+		E1E5AA661DDF821B004C662F /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5AA651DDF821B004C662F /* RestApiManager.swift */; };
+		E1E5AA681DDF842E004C662F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E5AA671DDF842E004C662F /* SwiftyJSON.swift */; };
+		E1E5AA691DDF8D8A004C662F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1E717F11DD8967500C81A6A /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E717DA1DD8967500C81A6A /* TesseractOCR.framework */; };
 		E1E7180C1DD8977300C81A6A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E7180B1DD8977300C81A6A /* CoreImage.framework */; };
 		E1E7180E1DD8978E00C81A6A /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E7180D1DD8978E00C81A6A /* libstdc++.6.0.9.tbd */; };
@@ -79,6 +81,8 @@
 		E1B62E091DC2A8F2009E2D98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
+		E1E5AA651DDF821B004C662F /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
+		E1E5AA671DDF842E004C662F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		E1E717DA1DD8967500C81A6A /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = KidsHelpReading/TesseractOCR.framework; sourceTree = "<group>"; };
 		E1E7180B1DD8977300C81A6A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		E1E7180D1DD8978E00C81A6A /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
@@ -173,8 +177,10 @@
 		E1ABF08A1DC5DA6100DC42EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E1E5AA671DDF842E004C662F /* SwiftyJSON.swift */,
 				E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */,
 				E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */,
+				E1E5AA651DDF821B004C662F /* RestApiManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -328,7 +334,7 @@
 				E16988BD1DC4990700E6F8DF /* GamePlayerModel.swift in Sources */,
 				E16988B61DC4983800E6F8DF /* KidsHelpReadingTests.swift in Sources */,
 				E1ABF07E1DC5546600DC42EB /* GenericTestCase.swift in Sources */,
-				E1ABF0801DC5680000DC42EB /* Model.xcdatamodeld in Sources */,
+				E1E5AA691DDF8D8A004C662F /* Model.xcdatamodeld in Sources */,
 				E1ABF07F1DC5622300DC42EB /* AppDelegate.swift in Sources */,
 				E16988BF1DC49AEC00E6F8DF /* DataContainer.swift in Sources */,
 				E1152D1B1DC5508000C0083F /* StoryModelTests.swift in Sources */,
@@ -341,6 +347,8 @@
 			files = (
 				E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */,
 				E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */,
+				E1E5AA661DDF821B004C662F /* RestApiManager.swift in Sources */,
+				E1E5AA681DDF842E004C662F /* SwiftyJSON.swift in Sources */,
 				E110FDE21DDA6333009F09DE /* UIStoryCollectionViewCell.swift in Sources */,
 				E19CA4431DC28DF3000C6C7C /* CreatorViewController.swift in Sources */,
 				E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */,
