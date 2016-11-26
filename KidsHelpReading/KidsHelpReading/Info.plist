@@ -17,13 +17,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.2</string>
+	<string>0.9</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>90.1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Bild aufnehmen zum Scannen</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright (c) 2016 by Lorenz Hänggi</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Bild aus Gallery holen zum Scannen</string>
 	<key>UILaunchStoryboardName</key>
