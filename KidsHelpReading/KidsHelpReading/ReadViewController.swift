@@ -76,9 +76,9 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let titleLabel = cell.contentView.viewWithTag(10) as? UILabel
         let pointCountLabel = cell.contentView.viewWithTag(20) as? UILabel
         let countGamesLabels = cell.contentView.viewWithTag(30) as? UILabel
-        var imageView = cell.contentView.viewWithTag(50) as? UIImageView
+        let imageView = cell.contentView.viewWithTag(50) as? UIImageView
         
-        var story: StoryModel = self.stories[indexPath.item]
+        let story: StoryModel = self.stories[indexPath.item]
         cell.story = story
         
         titleLabel?.text = story.title
@@ -87,8 +87,8 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         story.firstUIImage(view: imageView!)
         
-        var gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
-        var aSelector : Selector = #selector(ReadViewController.longPress(_:))
+        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+        let aSelector : Selector = #selector(ReadViewController.longPress(_:))
         gesture.addTarget(self, action: aSelector)
         gesture.delegate = self;
         gesture.delaysTouchesBegan = true;

@@ -11,7 +11,7 @@ import XCTest
 
 class StoryModelTests: GenericTestCase {
     
-    var story: StoryModel {
+    var story = {
         return self.container.getStories().first! as StoryModel
     }
 

@@ -191,7 +191,7 @@ extension StoryModel {
     }
     
     func firstUIImage(view: UIImageView) {
-        var localImage: UIImage? = self.title!.loadImage()
+        let localImage: UIImage? = self.title!.loadImage()
         if (localImage != nil) {
             DispatchQueue.main.async() { () -> Void in
                 view.image = localImage
