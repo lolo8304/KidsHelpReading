@@ -4,6 +4,9 @@
     #import("head")
 </head>
     <body>
-        #import("body")
+        <div class="message">
+            #import("body-header")
+            #import("body-data")
+        </div>
     </body>
 </html>

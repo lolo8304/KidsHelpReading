@@ -4,10 +4,15 @@ import Foundation
 
 final class Post: Model {
     var id: Node?
+    var exists: Bool = false
     var content: String
     
+    init(id: Node, content: String) {
+        self.id = id
+        self.content = content
+    }
     init(content: String) {
-        self.id = UUID().uuidString.makeNode()
+        self.id = nil
         self.content = content
     }
 
@@ -24,22 +29,15 @@ final class Post: Model {
     }
 }
 
-extension Post {
-    /**
-        This will automatically fetch from database, using example here to load
-        automatically for example. Remove on real models.
-    */
-    public convenience init?(from string: String) throws {
-        self.init(content: string)
-    }
-}
-
 extension Post: Preparation {
     static func prepare(_ database: Database) throws {
-        //
+        try database.create("posts", closure: { posts in
+            posts.id()
+            posts.string("content")
+        })
     }
 
     static func revert(_ database: Database) throws {
-        //
+        try database.delete("posts")
     }
 }
