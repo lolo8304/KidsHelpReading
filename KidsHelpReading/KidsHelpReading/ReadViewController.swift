@@ -15,6 +15,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var storyCollectionView: UICollectionView!
+    @IBOutlet weak var settingsButton2: UIBarButtonItem!
     
     var appDelegate:AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -93,12 +94,12 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         gesture.delegate = self;
         gesture.delaysTouchesBegan = true;
         cell.addGestureRecognizer(gesture)
-        
+
         return cell
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if (sender as AnyObject? === addButton || sender as AnyObject? === settingsButton) {
+        if (sender as AnyObject? === addButton || sender as AnyObject? === settingsButton || sender as AnyObject? === settingsButton2) {
             return true;
         } else {
             return false;
@@ -121,6 +122,8 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
         _ = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         //cell.backgroundColor = self.standardColor
     }
+    
+
     
     @IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
         if (sender.state == UIGestureRecognizerState.began) {

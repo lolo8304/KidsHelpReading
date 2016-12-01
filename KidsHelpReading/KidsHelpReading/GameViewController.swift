@@ -179,6 +179,10 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         }
     }
     
+    @IBAction func nextImage(_ sender: UIBarButtonItem) {
+        self.story.nextUIImage(view: self.imageView)
+    }
+    
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
     }
     

@@ -3,6 +3,28 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "RestApiManager.(imageSearch(query : String, onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json[&quot;items&quot;].type == .null">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GoogleImageSearch.(getFirstImage(onCompletion : (String, Int, Int, String) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.results!.type == .null">
+            </PersistentString>
+            <PersistentString
+               value = "entry[&quot;link&quot;].stringValue">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;items&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "StoryModelTests.testStoryGameStart() -&gt; ():StoryModelTests.swift">
          <PersistentStrings>
             <PersistentString
@@ -17,21 +39,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GoogleImageSearch.(getFirstImage(onCompletion : (String, Int, Int, String) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
+         contextName = "GameModeWord.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;items&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "self.results!.type == .null">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RestApiManager.(imageSearch(query : String, onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "json[&quot;items&quot;].type == .null">
+               value = "story.lastGame().lastTimer().word">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -47,32 +58,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameModeWord.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "story.lastGame().lastTimer().word">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "GameModeWordPrefixSuffixBySentence.buildWordPrefixSuffix(story : StoryModel, w : String) -&gt; String:GamePlayerModel.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.wordIndex">
+               value = "story.allWords">
             </PersistentString>
             <PersistentString
                value = "wordsBySentences[self.sentenceIndex]">
             </PersistentString>
             <PersistentString
-               value = "story.allWords">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GoogleImageSearch.(getImageData(onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "json[&quot;items&quot;]">
+               value = "self.wordIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,6 +76,14 @@
          <PersistentStrings>
             <PersistentString
                value = "error.message()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameModeWordBySentence.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.wordIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -112,8 +115,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GameModeWordBySentence.start(story : StoryModel) -&gt; String:GamePlayerModel.swift">
+         contextName = "GoogleImageSearch.(getImageData(onCompletion : (JSON) -&gt; ()) -&gt; ()).(closure #1):RestApiManager.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "json[&quot;items&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CreatorViewController.add(UIBarButtonItem) -&gt; ():CreatorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameModeWordBySentence.start(story : StoryModel) -&gt; ():GamePlayerModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sentences.randomElementIndex">
+            </PersistentString>
+            <PersistentString
+               value = "self.sentenceIndex">
+            </PersistentString>
             <PersistentString
                value = "self.wordIndex">
             </PersistentString>
@@ -121,6 +146,25 @@
       </ContextState>
       <ContextState
          contextName = "ReadViewController.longPress(UILongPressGestureRecognizer) -&gt; ():ReadViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GoogleImageSearch.getNextImage(onCompletion : (String, String, Int, Int, String) -&gt; ()) -&gt; ():RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "jsonResult!.array!">
+            </PersistentString>
+            <PersistentString
+               value = "jsonResult.rawString()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "String.deleteImage() -&gt; ():RestApiManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url.path">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "TimeModel.doneStep() -&gt; ():GamePlayerModel.swift">

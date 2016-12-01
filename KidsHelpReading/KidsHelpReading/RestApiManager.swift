@@ -11,8 +11,18 @@ import Foundation
 
 class RestApiManager: NSObject {
     static let sharedInstance = RestApiManager()
+    static let GoogleAPIKey1 = "AIza"
+    static let GoogleAPIKey2 = "SyDihpH"
+    static let GoogleAPIKey3 = "TSOHidPN6bFfXK"
+    static let GoogleAPIKey4 = "TR0G4CIHfMPrlE"
+    static let GoogleAPIKey = "\(RestApiManager.GoogleAPIKey1)\(RestApiManager.GoogleAPIKey2)\(RestApiManager.GoogleAPIKey3)\(RestApiManager.GoogleAPIKey4)"
+    static let GoogleEngineID1 = "011195144687224883122"
+    static let GoogleEngineID2 = "o7p6a9fkkee"
+    static let GoogleEngineID = "\(RestApiManager.GoogleEngineID1):\(RestApiManager.GoogleEngineID2)"
+    static let GoogleFileTypes = "jpg%2C+png"
+    static let GoogleResultFields = "items(cacheId%2CfileFormat%2Cimage(thumbnailHeight%2CthumbnailLink%2CthumbnailWidth)%2Ckind%2Clink%2Cmime%2Ctitle)"
     
-    let baseURL = "https://www.googleapis.com/customsearch/v1?&key=AIzaSyDihpHTSOHidPN6bFfXKTR0G4CIHfMPrlE&cx=011195144687224883122:o7p6a9fkkee&fileType=jpg%2C+png&filter=1&searchType=image&fields=items(cacheId%2CfileFormat%2Cimage(thumbnailHeight%2CthumbnailLink%2CthumbnailWidth)%2Ckind%2Clink%2Cmime%2Ctitle)&q="
+    static let baseURL = "https://www.googleapis.com/customsearch/v1?&key=\(RestApiManager.GoogleAPIKey)&cx=\(RestApiManager.GoogleEngineID)&fileType=\(RestApiManager.GoogleFileTypes)&filter=1&searchType=image&fields=\(RestApiManager.GoogleResultFields)"
         
     // MARK: Perform a GET Request
     private func makeHTTPGetRequest(path: String, onCompletion: @escaping (_ json: JSON, _ error: Error?) -> Void) {
@@ -56,7 +66,7 @@ class RestApiManager: NSObject {
     }
     
     func imageSearch(query: String, onCompletion: @escaping (JSON) -> Void) {
-        let route = "\(baseURL)\(query)"
+        let route = "\(RestApiManager.baseURL)&q=\(query)"
         makeHTTPGetRequest(path: route, onCompletion: { json, err in
             let jj = json as JSON
             if (jj["items"].type == .null) {
@@ -88,19 +98,58 @@ class GoogleImageSearch {
             onCompletion(self.results!)
         }
     }
-    func getFirstImage(onCompletion: @escaping (String, Int, Int, String) -> Void) {
+    func getFirstImage(onCompletion: @escaping (String, String, Int, Int, String) -> Void) {
         self.getImageData( onCompletion: { (json: JSON) in
             if (self.results!.type == .array) {
+                self.query.saveResult(json: self.results!)
                 for entry in self.results!.array! {
+                    self.query.saveEntry(json: entry)
                     onCompletion(
+                        entry["link"].stringValue,
                         entry["image"]["thumbnailLink"].stringValue,
                         entry["image"]["thumbnailHeight"].intValue,
                         entry["image"]["thumbnailWidth"].intValue,
                         entry["mime"].stringValue)
+                    return
                 }
             }
         })
     }
+    func getNextImage(onCompletion: @escaping (String, String, Int, Int, String) -> Void) {
+        let jsonResult = self.query.loadResult()
+        let jsonEntry = self.query.loadEntry()
+        if (jsonResult != nil && jsonEntry != nil) {
+            var found = false
+            for entry in jsonResult!.array! {
+                if (found) {
+                    self.query.saveEntry(json: entry)
+                    self.query.deleteImage()
+                    onCompletion(
+                        entry["link"].stringValue,
+                        entry["image"]["thumbnailLink"].stringValue,
+                        entry["image"]["thumbnailHeight"].intValue,
+                        entry["image"]["thumbnailWidth"].intValue,
+                        entry["mime"].stringValue)
+                    return
+                }
+                if (entry["link"].stringValue == jsonEntry!["link"].stringValue) {
+                    found = true
+                }
+            }
+            var entry = jsonResult!.array![0]
+            self.query.saveEntry(json: entry)
+            onCompletion(
+                entry["link"].stringValue,
+                entry["image"]["thumbnailLink"].stringValue,
+                entry["image"]["thumbnailHeight"].intValue,
+                entry["image"]["thumbnailWidth"].intValue,
+                entry["mime"].stringValue)
+            
+        } else {
+            self.getFirstImage(onCompletion: onCompletion)
+        }
+    }
+
 }
 
 extension String {
@@ -122,6 +171,29 @@ extension String {
             print(error)
         }
     }
+    func deleteImage() {
+        do {
+            try FileManager.default.removeItem(atPath: self.fileInDocumentsDirectory())
+        } catch {
+            print(error)
+        }
+    }
+    func saveResult(json: JSON) {
+        do {
+            let fileName = "\(self.fileInDocumentsDirectory()).json"
+            try json.rawData().write(to: URL(fileURLWithPath: fileName), options: .atomic)
+        } catch {
+            print(error)
+        }
+    }
+    func saveEntry(json: JSON) {
+        do {
+            let fileName = "\(self.fileInDocumentsDirectory()).entry.json"
+            try json.rawData().write(to: URL(fileURLWithPath: fileName), options: .atomic)
+        } catch {
+            print(error)
+        }
+    }
 
     func loadImage() -> UIImage? {
         do {
@@ -136,36 +208,67 @@ extension String {
             }
         }
     }
+    func loadResult() -> JSON? {
+        do {
+            let fileName = "\(self.fileInDocumentsDirectory()).json"
+            let data = try Data(contentsOf: URL(fileURLWithPath: fileName))
+            print("JSON result for '\(self)' found in cache")
+            return JSON(data: data);
+        } catch {
+            print("JSON result for '\(self)' not found. Get it")
+            return nil
+        }
+    }
+    func loadEntry() -> JSON? {
+        do {
+            let fileName = "\(self.fileInDocumentsDirectory()).entry.json"
+            let data = try Data(contentsOf: URL(fileURLWithPath: fileName))
+            print("JSON entry for '\(self)' found in cache")
+            return JSON(data: data);
+        } catch {
+            print("JSON entry for '\(self)' not found. Get it")
+            return nil
+        }
+    }
 
 }
 
 
 extension UIImageView {
     
-    func downloadedFrom(url: URL, name: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+    private func setImage(linkUrl: URL, name: String, onError: @escaping () -> Void) {
+        URLSession.shared.dataTask(with: linkUrl) { (data, response, error) in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data: Data = data, error == nil,
+                let image = UIImage(data: data)
+                else { onError(); return }
+            DispatchQueue.main.async() { () -> Void in
+                name.saveImage(data: data)
+                self.image = image
+                return
+            }
+        }.resume()
+    }
+    
+    func downloadedFrom(linkUrl: URL, thumbnailUrl: URL, name: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
         let localImage = name.loadImage()
         if (localImage == nil) {
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard
-                    let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                    let data: Data = data, error == nil,
-                    let image = UIImage(data: data)
-                    else { return }
-                DispatchQueue.main.async() { () -> Void in
-                    name.saveImage(data: data)
-                    self.image = image
-                }
-            }.resume()
+            self.setImage(linkUrl: linkUrl, name: name, onError: {
+                self.setImage(linkUrl: thumbnailUrl, name: name, onError: {
+                })
+            })
         } else {
             DispatchQueue.main.async() { () -> Void in
                 self.image = localImage
             }
         }
     }
-    func downloadedFrom(link: String, name: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloadedFrom(url: url, name: name, contentMode: mode)
+    func downloadedFrom(link: String, thumbnail: String, name: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+        guard let linkUrl = URL(string: link) else { return }
+        guard let thumbnailUrl = URL(string: thumbnail) else { return }
+        downloadedFrom(linkUrl: linkUrl, thumbnailUrl: thumbnailUrl, name: name, contentMode: mode)
     }
 }

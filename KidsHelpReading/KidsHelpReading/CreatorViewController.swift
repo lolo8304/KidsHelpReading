@@ -75,15 +75,20 @@ class CreatorViewController: UIViewController, UITextViewDelegate, UINavigationC
         } else {
             DataContainer.sharedInstance.createNewStory(name: self.titleField.text!, text: self.textView.text)
         }
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController!.popViewController(animated: true)
     }
 
+    @IBAction func spellchecker(_ sender: UIButton) {
+        textView.isEditable = true
+        textView.attributedText = spellChecker(string: textView.text).fromBracketsToAttributes()
+
+    }
     @IBAction func deleteItem(_ sender: UIBarButtonItem) {
         if (self.container.selectedStory != nil) {
             self.container.deleteStory(story: self.container.selectedStory!)
             self.container.selectedStory = nil
         }
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController!.popViewController(animated: true)
     }
 
     @IBAction func capture(_ sender: UIBarButtonItem) {

@@ -35,12 +35,13 @@ class DataContainer {
     var data: [StoryModel] = [];
     var selectedStory: StoryModel? {
         willSet(newStory) {
-            if (newStory != selectedStory) {
-                self.resetTimes()
+            if (newStory != nil && newStory != selectedStory) {
+                self.mode = newStory!.getGameMode(self.mode.mode())
+               // newStory?.resetTimes()
             }
         }
     }
-    var mode: GameMode = GameModeWordFullSentence()
+    var mode: GameMode = GameModeWordFullSentenceAfterSentence()
     
     private init() {
     }
@@ -155,15 +156,18 @@ class DataContainer {
             DataContainer.sharedInstance.setModeSentenceAfterSentence()
         }
     }
-    
+
+    func getModes() -> [GameMode] {
+        return [
+            GameModeWord(),
+            GameModeWordBySentence(),
+            GameModeWordPrefixSuffixBySentence(),
+            GameModeWordFullSentence(),
+            GameModeWordFullSentenceAfterSentence()
+        ]
+    }
     func setModeWord(){
         self.mode = GameModeWord()
-    }
-    func setModeSentence() {
-        self.mode = GameModeWordFullSentence()
-    }
-    func setModeSentenceAfterSentence() {
-        self.mode = GameModeWordFullSentenceAfterSentence()
     }
     func setModeWordBySentence() {
         self.mode = GameModeWordBySentence()
@@ -171,5 +175,60 @@ class DataContainer {
     func setModeWordPrefixBySentence() {
         self.mode = GameModeWordPrefixSuffixBySentence()
     }
+    func setModeSentence() {
+        self.mode = GameModeWordFullSentence()
+    }
+    func setModeSentenceAfterSentence() {
+        self.mode = GameModeWordFullSentenceAfterSentence()
+    }
+    
+    func exportVia(controller: UIViewController) {
+        let fileName = "kids-help-reading.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        
+        let stories: [StoryModel] = DataContainer.sharedInstance.getStories()
+        var csvText: String = ""
+        var csvHeader: String = ""
+        for story: StoryModel in stories {
+            let export = story.addTimesTo(export: [])
+            for time: TimeModel in export {
+                csvText.append(time.csvRow(story: story))
+                csvHeader = time.csvHeaderRow()
+            }
+        }
+        if (!csvText.isEmpty) {
+            csvHeader.append(csvText)
+            csvText = csvHeader;
+            do {
+                try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+                
+                let vc = UIActivityViewController(activityItems: [path!], applicationActivities: nil)
+                vc.excludedActivityTypes = [
+                    UIActivityType.assignToContact,
+                    UIActivityType.saveToCameraRoll,
+                    UIActivityType.postToFlickr,
+                    UIActivityType.postToVimeo,
+                    UIActivityType.postToTencentWeibo,
+                    UIActivityType.postToTwitter,
+                    UIActivityType.postToFacebook,
+                    UIActivityType.openInIBooks
+                ]
+                vc.popoverPresentationController?.sourceView = controller.view
+                controller.present(vc, animated: true, completion: nil)
+                
+            } catch {
+                
+                print("Failed to create file")
+                print("\(error)")
+            }
+            /*
+             let dateFormatter = DateFormatter()
+             dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+             let convertedDate = dateFormatter.stringFromDate(...date...)
+             */
+        }
+        
+    }
+    
 
 }

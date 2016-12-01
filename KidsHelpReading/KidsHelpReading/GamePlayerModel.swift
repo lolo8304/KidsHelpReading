@@ -103,6 +103,14 @@ extension StoryModel {
         return sentences
     }
     
+    var gameModes: [GameMode] {
+        return DataContainer.sharedInstance.getModes()
+    }
+    
+    func getGameMode(_ mode: Int) -> GameMode {
+        return self.gameModes[mode]
+    }
+    
     func start() {
         self.newGame().start()
         self.points = 0
@@ -110,6 +118,9 @@ extension StoryModel {
     }
     func word() -> String {
         return self.lastGame().word()
+    }
+    func word(_ string: String) {
+        self.lastGame().word(string)
     }
     func lastWord() -> String {
         return self.lastGame().lastWord()
@@ -184,9 +195,14 @@ extension StoryModel {
         return GoogleImageSearch(query: self.title!)
     }
     
-    func randomUIImage(onCompletion: @escaping (String) -> Void) {
-        self.google.getFirstImage(onCompletion: { (url: String, height: Int, width: Int, mimeType: String) in
-                onCompletion(url)
+    func randomUIImage(onCompletion: @escaping (String, String) -> Void) {
+        self.google.getFirstImage(onCompletion: { (linkUrl: String, thumbnailUrl: String, height: Int, width: Int, mimeType: String) in
+            onCompletion(linkUrl, thumbnailUrl)
+        })
+    }
+    func nextUIImage(onCompletion: @escaping (String, String) -> Void) {
+        self.google.getNextImage(onCompletion: { (linkUrl: String, thumbnailUrl: String, height: Int, width: Int, mimeType: String) in
+            onCompletion(linkUrl, thumbnailUrl)
         })
     }
     
@@ -197,23 +213,29 @@ extension StoryModel {
                 view.image = localImage
             }
         } else {
-            self.randomUIImage(onCompletion: { (url: String) in
-                view.downloadedFrom(link: url, name: self.title!)
+            self.randomUIImage(onCompletion: { (linkUrl: String, thumbnailUrl: String) in
+                view.downloadedFrom(link: linkUrl, thumbnail: thumbnailUrl, name: self.title!)
             })
         }
 
+    }
+    func nextUIImage(view: UIImageView) {
+        self.nextUIImage(onCompletion: { (linkUrl: String, thumbnailUrl: String) in
+            view.downloadedFrom(link: linkUrl, thumbnail: thumbnailUrl, name: self.title!)
+        })
     }
     
 }
 
 extension GameModel {
     func start() {
-        self.startTime = self.startStep().startTime
+        self.startStep()
+        self.startTime = self.lastTimer().startTime
         self.points = 0
     }
-    func next() -> TimeModel {
+    func next() {
         self.lastTimer().doneStep()
-        return self.newStep()
+        self.newStep()
     }
     func skip() -> TimeModel {
         self.lastTimer().skip()
@@ -225,6 +247,9 @@ extension GameModel {
     }
     func word() -> String {
         return self.lastTimer().word!
+    }
+    func word(_ string: String) {
+        self.lastTimer().word = string
     }
     func lastWord() -> String {
         let lastTimer : TimeModel? = self.beforeLastTimer()
@@ -259,18 +284,17 @@ extension GameModel {
         return Int16(NSDate().timeIntervalSince(self.startTime as! Date))
     }
     
-    func startStep() -> TimeModel{
-        return self.newStep()
+    func startStep() {
+        self.newStep()
     }
     func doneStep() {
         self.lastTimer().doneStep()
     }
-    func newStep() -> TimeModel {
+    func newStep() {
         let timer: TimeModel = TimeModel(context: managedObjectContext!)
         timer.initStep()
         self.addToTimes(timer)
         timer.game = self
-        return timer
     }
     func updatePoints(point: Int16) {
         self.points = max(self.points + point, 0)
@@ -358,11 +382,9 @@ class GameMode {
     var wordIndex: Int = 0;
     var sentenceIndex: Int = 0;
 
-    func start(story: StoryModel) -> String {
-        return "no-game-mode";
+    func start(story: StoryModel) {
     }
-    func next(story: StoryModel) -> String {
-        return "no-game-mode";
+    func next(story: StoryModel) {
     }
     func mode() -> Int {
         return -1;
@@ -378,19 +400,20 @@ class GameMode {
 class GameModeWord: GameMode {
     
     
-    override func start(story: StoryModel) -> String {
+    override func start(story: StoryModel) {
         self.wordIndex = story.allWords.randomElementIndex
         let word: String = story.allWords[self.wordIndex]
-        story.lastGame().lastTimer().word = word
-        return word
+        story.word(word)
     }
-    override func next(story: StoryModel) -> String {
+    override func next(story: StoryModel) {
         let old: String = story.lastWord()
         self.wordIndex = story.allWords.randomElementIndex
         let new: String = story.allWords[self.wordIndex]
-        if (story.allWords.count > 1 && new == old) { return self.next(story: story) }
-        story.lastGame().lastTimer().word = new
-        return new
+        if (story.allWords.count > 1 && new == old) {
+            self.next(story: story)
+            return
+        }
+        story.word(new)
     }
     override func mode() -> Int {
         return 0;
@@ -411,23 +434,22 @@ class GameModeWordBySentence: GameMode {
         wordIndex = -1
     }
     
-    func nextSentenceIndex(_ sentences: Array<Any>) -> Int {
-        return sentences.randomElementIndex
+    func nextSentenceIndex(_ sentences: Array<Any>) {
+        self.sentenceIndex = sentences.randomElementIndex
     }
-    override func start(story: StoryModel) -> String {
+    override func start(story: StoryModel) {
         let wordsBySentences: [[String]] = story.allWordsbySentences
-        self.sentenceIndex = self.nextSentenceIndex(wordsBySentences)
+        self.nextSentenceIndex(wordsBySentences)
         self.wordIndex = 0
         let word: String = wordsBySentences[self.sentenceIndex][self.wordIndex]
-        story.lastGame().lastTimer().word = word
-        return word
+        story.word(word)
     }
-    override func next(story: StoryModel) -> String {
+    override func next(story: StoryModel) {
         let wordsBySentences: [[String]] = story.allWordsbySentences
         var word: String = ""
         self.wordIndex += 1
         if (self.wordIndex == wordsBySentences[self.sentenceIndex].count) {
-            self.sentenceIndex = self.nextSentenceIndex(wordsBySentences)
+            self.nextSentenceIndex(wordsBySentences)
             self.wordIndex = 0
             word = wordsBySentences[self.sentenceIndex][self.wordIndex]
         } else {
@@ -437,8 +459,7 @@ class GameModeWordBySentence: GameMode {
                 word = wordsBySentences[self.sentenceIndex][self.wordIndex]
             }
         }
-        story.lastGame().lastTimer().word = word
-        return word
+        story.word(word)
         
     }
     override func mode() -> Int {
@@ -471,17 +492,13 @@ class GameModeWordPrefixSuffixBySentence: GameModeWordBySentence {
         }
         return word
     }
-    override func start(story: StoryModel) -> String {
-        var word: String = super.start(story: story)
-        word = self.buildWordPrefixSuffix(story: story, w: word)
-        story.lastGame().lastTimer().word = word
-        return word
+    override func start(story: StoryModel) {
+        super.start(story: story)
+        story.word(self.buildWordPrefixSuffix(story: story, w: story.word()))
     }
-    override func next(story: StoryModel) -> String {
-        var word: String = super.next(story: story)
-        word = self.buildWordPrefixSuffix(story: story, w: word)
-        story.lastGame().lastTimer().word = word
-        return word
+    override func next(story: StoryModel) {
+        super.next(story: story)
+        story.word(self.buildWordPrefixSuffix(story: story, w: story.word()))
     }
     override func mode() -> Int {
         return 2;
@@ -516,17 +533,13 @@ class GameModeWordFullSentence: GameModeWordBySentence {
         self.wordPosition = "\(startSentence)\(prefix)\(selectedWord)".endIndex
         return "\(startSentence)\(prefix){{\(selectedWord)}}\(endSentence)";
     }
-    override func start(story: StoryModel) -> String {
-        var word: String = super.start(story: story)
-        word = self.buildWordPrefixSuffix(story: story, w: word)
-        story.lastGame().lastTimer().word = word
-        return word
+    override func start(story: StoryModel) {
+        super.start(story: story)
+        story.word(self.buildWordPrefixSuffix(story: story, w: story.word()))
     }
-    override func next(story: StoryModel) -> String {
-        var word: String = super.next(story: story)
-        word = self.buildWordPrefixSuffix(story: story, w: word)
-        story.lastGame().lastTimer().word = word
-        return word
+    override func next(story: StoryModel) {
+        super.next(story: story)
+        story.word(self.buildWordPrefixSuffix(story: story, w: story.word()))
     }
     override func mode() -> Int {
         return 3;
@@ -540,8 +553,12 @@ class GameModeWordFullSentence: GameModeWordBySentence {
 }
 
 class GameModeWordFullSentenceAfterSentence: GameModeWordFullSentence {
-    override func nextSentenceIndex(_ sentences: Array<Any>) -> Int {
-        return self.sentenceIndex + 1
+    override func nextSentenceIndex(_ sentences: Array<Any>) {
+        if (self.sentenceIndex + 1 == sentences.count) {
+            self.sentenceIndex = 0
+        } else {
+            self.sentenceIndex = self.sentenceIndex + 1
+        }
     }
     override func mode() -> Int {
         return 4;

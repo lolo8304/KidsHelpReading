@@ -27,9 +27,8 @@
 		E1ABF07F1DC5622300DC42EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19CA43E1DC28DF3000C6C7C /* AppDelegate.swift */; };
 		E1ABF0831DC5978E00DC42EB /* Text.Die Kleine Hexe.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */; };
 		E1ABF0851DC5984E00DC42EB /* Text.Das kleine Gespenst.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */; };
-		E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */; };
 		E1ABF08D1DC6075000DC42EB /* Text.Beast Quest - Arachnid, Meister der Spinnen.txt in Resources */ = {isa = PBXBuildFile; fileRef = E1ABF08C1DC6075000DC42EB /* Text.Beast Quest - Arachnid, Meister der Spinnen.txt */; };
-		E1B62E071DC2A833009E2D98 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */; };
+		E1B62E071DC2A833009E2D98 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E061DC2A833009E2D98 /* SettingsTableViewController.swift */; };
 		E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E081DC2A8F2009E2D98 /* Model.xcdatamodeld */; };
 		E1B62E0C1DC2AF67009E2D98 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */; };
 		E1B62E961DC2C4B2009E2D98 /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */; };
@@ -75,9 +74,8 @@
 		E1ABF07D1DC5546600DC42EB /* GenericTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTestCase.swift; sourceTree = "<group>"; };
 		E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Die Kleine Hexe.txt"; sourceTree = "<group>"; };
 		E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Das kleine Gespenst.txt"; sourceTree = "<group>"; };
-		E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Yannicks Wörter.txt"; sourceTree = "<group>"; };
 		E1ABF08C1DC6075000DC42EB /* Text.Beast Quest - Arachnid, Meister der Spinnen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Text.Beast Quest - Arachnid, Meister der Spinnen.txt"; sourceTree = "<group>"; };
-		E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E1B62E061DC2A833009E2D98 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E1B62E091DC2A8F2009E2D98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E1B62E0B1DC2AF67009E2D98 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1B62E951DC2C4B2009E2D98 /* DataContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				E1ABF0821DC5978E00DC42EB /* Text.Die Kleine Hexe.txt */,
 				E10430CB1DD780EE00BA83D5 /* Text.DieDreiFrageZeichenKids.PanikImParadies.txt */,
 				E1ABF0841DC5984E00DC42EB /* Text.Das kleine Gespenst.txt */,
-				E1ABF0881DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt */,
 				E1ABF08C1DC6075000DC42EB /* Text.Beast Quest - Arachnid, Meister der Spinnen.txt */,
 				E10430CD1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt */,
 			);
@@ -191,7 +188,7 @@
 				E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */,
 				E16988AB1DC401D800E6F8DF /* GameViewController.swift */,
 				E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */,
-				E1B62E061DC2A833009E2D98 /* SettingsViewController.swift */,
+				E1B62E061DC2A833009E2D98 /* SettingsTableViewController.swift */,
 				E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */,
 			);
 			name = Controller;
@@ -313,7 +310,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1ABF0891DC5A1AB00DC42EB /* Text.Yannicks Wörter.txt in Resources */,
 				E19CA44B1DC28DF3000C6C7C /* LaunchScreen.storyboard in Resources */,
 				E19CA4481DC28DF3000C6C7C /* Assets.xcassets in Resources */,
 				E1FD44F81DD8B0E400258A83 /* tessdata in Resources */,
@@ -357,7 +353,7 @@
 				E19CA43F1DC28DF3000C6C7C /* AppDelegate.swift in Sources */,
 				E1B62E0A1DC2A8F2009E2D98 /* Model.xcdatamodeld in Sources */,
 				E19CA4411DC28DF3000C6C7C /* ReadViewController.swift in Sources */,
-				E1B62E071DC2A833009E2D98 /* SettingsViewController.swift in Sources */,
+				E1B62E071DC2A833009E2D98 /* SettingsTableViewController.swift in Sources */,
 				E1B62E961DC2C4B2009E2D98 /* DataContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
