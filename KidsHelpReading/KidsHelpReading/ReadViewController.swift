@@ -47,6 +47,10 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = UIImageView(image: UIImage(named: "ebook")!)
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.25
+        self.storyCollectionView.backgroundView = imageView
         
         // Do any additional setup after loading the view, typically from a nib.
     }
