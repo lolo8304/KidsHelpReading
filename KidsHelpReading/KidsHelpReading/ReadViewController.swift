@@ -12,10 +12,7 @@ import UIKit
 
 class ReadViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
 
-    @IBOutlet weak var addButton: UIBarButtonItem!
-    @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var storyCollectionView: UICollectionView!
-    @IBOutlet weak var settingsButton2: UIBarButtonItem!
     
     var appDelegate:AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -47,7 +44,8 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = UIImageView(image: UIImage(named: "ebook")!)
+        let no: Int = Int(arc4random_uniform(UInt32(3)))+1
+        let imageView = UIImageView(image: UIImage(named: "kids-reading-\(no)")!)
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.25
         self.storyCollectionView.backgroundView = imageView
@@ -103,11 +101,7 @@ class ReadViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if (sender as AnyObject? === addButton || sender as AnyObject? === settingsButton || sender as AnyObject? === settingsButton2) {
-            return true;
-        } else {
-            return false;
-        }
+        return false
     }
     
     

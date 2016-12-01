@@ -14,7 +14,7 @@
         <!--Home-->
         <scene sceneID="w5x-Np-AVb">
             <objects>
-                <viewController id="EE5-Rw-3qg" sceneMemberID="viewController">
+                <viewController id="EE5-Rw-3qg" customClass="HomeViewController" customModule="KidsHelpReading" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wUa-uI-I2h"/>
                         <viewControllerLayoutGuide type="bottom" id="6oY-uS-zaM"/>
@@ -23,64 +23,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ebook" translatesAutoresizingMaskIntoConstraints="NO" id="CDf-Qb-sKG">
+                            <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kids-reading-1" translatesAutoresizingMaskIntoConstraints="NO" id="CDf-Qb-sKG">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-L7-ZZh">
-                                <rect key="frame" x="475" y="395" width="73" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Lesen">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NT3-L7-ZZh">
+                                <rect key="frame" x="547" y="591" width="211" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title=" Lesen" image="read">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="9pv-A4-QxB" kind="show" id="Cmf-ar-Vmw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ik-l9-lnc">
-                                <rect key="frame" x="70" y="441" width="114" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Scanning">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ik-l9-lnc">
+                                <rect key="frame" x="154" y="542" width="195" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title=" Neu" image="create">
                                     <color key="titleColor" red="1" green="0.17253561410000001" blue="0.083959094509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="8rJ-Kc-sve" kind="show" id="79D-XC-NGl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWI-VX-O3s">
-                                <rect key="frame" x="792" y="441" width="162" height="46"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="Einstellungen">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWI-VX-O3s">
+                                <rect key="frame" x="672" y="700" width="332" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title=" Einstellungen" image="settings">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="LR4-pX-UsV" kind="show" id="dtb-Zq-PdU"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookstore" translatesAutoresizingMaskIntoConstraints="NO" id="w6y-vL-o8J">
-                                <rect key="frame" x="70" y="64" width="884" height="407"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="407" id="nf4-Ue-dIB"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kinder lernen Lesen" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-yE-xRP">
+                                <rect key="frame" x="20" y="98" width="984" height="81"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="3" height="3"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mit Spass !!!" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g9-aL-vtO">
+                                <rect key="frame" x="512" y="187" width="450" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="60"/>
+                                <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="3" height="3"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="pWI-VX-O3s" firstAttribute="trailing" secondItem="w6y-vL-o8J" secondAttribute="trailing" id="2aw-61-Tor"/>
-                            <constraint firstItem="pWI-VX-O3s" firstAttribute="top" secondItem="w6y-vL-o8J" secondAttribute="bottom" constant="-30" id="3d6-CB-tzP"/>
-                            <constraint firstItem="NT3-L7-ZZh" firstAttribute="bottom" secondItem="w6y-vL-o8J" secondAttribute="bottom" constant="-30" id="9Ph-Qt-8x4"/>
-                            <constraint firstItem="CDf-Qb-sKG" firstAttribute="centerX" secondItem="w6y-vL-o8J" secondAttribute="centerX" id="HAv-L7-7ag"/>
-                            <constraint firstItem="w6y-vL-o8J" firstAttribute="top" secondItem="wUa-uI-I2h" secondAttribute="bottom" id="QfT-Eq-MTY"/>
-                            <constraint firstItem="CDf-Qb-sKG" firstAttribute="leading" secondItem="sbO-bh-itR" secondAttribute="leading" id="RBs-46-akA"/>
-                            <constraint firstItem="CDf-Qb-sKG" firstAttribute="top" secondItem="wUa-uI-I2h" secondAttribute="bottom" id="TGE-cT-Prl"/>
-                            <constraint firstItem="8ik-l9-lnc" firstAttribute="baseline" secondItem="pWI-VX-O3s" secondAttribute="baseline" id="Wol-Km-rM9"/>
-                            <constraint firstItem="CDf-Qb-sKG" firstAttribute="bottom" secondItem="6oY-uS-zaM" secondAttribute="top" id="Xt4-EK-BaE"/>
-                            <constraint firstItem="8ik-l9-lnc" firstAttribute="leading" secondItem="w6y-vL-o8J" secondAttribute="leading" id="aCh-Mi-2xc"/>
-                            <constraint firstItem="w6y-vL-o8J" firstAttribute="leading" secondItem="sbO-bh-itR" secondAttribute="leadingMargin" constant="50" id="hQh-U9-aHW"/>
-                            <constraint firstItem="w6y-vL-o8J" firstAttribute="centerX" secondItem="sbO-bh-itR" secondAttribute="centerX" id="lB9-b9-zea"/>
-                            <constraint firstItem="NT3-L7-ZZh" firstAttribute="centerX" secondItem="w6y-vL-o8J" secondAttribute="centerX" id="s1q-T9-QB7"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="Scx-Oj-AGy"/>
+                    <connections>
+                        <outlet property="imageView" destination="CDf-Qb-sKG" id="RW4-qJ-j8H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYx-nH-BDy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,7 +175,7 @@
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="9Au-wF-fKa" appends="YES" id="F8K-EW-5PS"/>
-                                                    <segue destination="cjQ-tO-qRY" kind="show" identifier="PlayGame" id="7Lu-bW-Cy4"/>
+                                                    <segue destination="8rJ-Kc-sve" kind="show" identifier="AddEditGame" id="6UY-IH-wAd"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -187,24 +191,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="T7v-Rg-sho" secondAttribute="trailing" id="rcm-Lu-C1k"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Lesen" id="fxA-ud-uUT">
-                        <rightBarButtonItems>
-                            <barButtonItem image="settings" id="fqb-ZG-ohL">
-                                <connections>
-                                    <action selector="settings2Pushed:" destination="9pv-A4-QxB" id="Ltj-IM-GQy"/>
-                                    <segue destination="LR4-pX-UsV" kind="show" identifier="Settings2" id="xLq-mt-m8p"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" id="AC1-EX-4UN">
-                                <connections>
-                                    <segue destination="8rJ-Kc-sve" kind="show" identifier="AddEditGame" id="O4Q-01-4A3"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Lesen" id="fxA-ud-uUT"/>
                     <connections>
-                        <outlet property="addButton" destination="AC1-EX-4UN" id="pxl-Dl-6dF"/>
-                        <outlet property="settingsButton2" destination="fqb-ZG-ohL" id="ukH-3j-ztN"/>
                         <outlet property="storyCollectionView" destination="vxX-4I-v59" id="ogi-U1-lWZ"/>
                     </connections>
                 </viewController>
@@ -708,9 +696,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bookstore" width="666" height="265"/>
         <image name="create" width="30" height="30"/>
-        <image name="ebook" width="317" height="210"/>
+        <image name="kids-reading-1" width="640" height="425"/>
         <image name="listen" width="30" height="30"/>
         <image name="listen-all" width="30" height="30"/>
         <image name="magicwand" width="30" height="30"/>
@@ -718,7 +705,6 @@
         <image name="settings" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dtb-Zq-PdU"/>
         <segue reference="79D-XC-NGl"/>
     </inferredMetricsTieBreakers>
 </document>

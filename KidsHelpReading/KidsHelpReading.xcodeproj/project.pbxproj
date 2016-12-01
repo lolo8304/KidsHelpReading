@@ -11,6 +11,7 @@
 		E10430CE1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt in Resources */ = {isa = PBXBuildFile; fileRef = E10430CD1DD782FF00BA83D5 /* Text.Die Teufelskicker Eine knallharte Saison.txt */; };
 		E110FDE21DDA6333009F09DE /* UIStoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */; };
 		E1152D1B1DC5508000C0083F /* StoryModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1152D1A1DC5508000C0083F /* StoryModelTests.swift */; };
+		E15712CE1DF0DCDD0070C4CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15712CD1DF0DCDD0070C4CF /* HomeViewController.swift */; };
 		E16988AC1DC401D800E6F8DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AB1DC401D800E6F8DF /* GameViewController.swift */; };
 		E16988AE1DC40EB300E6F8DF /* GamePlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */; };
 		E16988B61DC4983800E6F8DF /* KidsHelpReadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16988B51DC4983800E6F8DF /* KidsHelpReadingTests.swift */; };
@@ -57,6 +58,7 @@
 		E110FDE11DDA6333009F09DE /* UIStoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E110FDE71DDCE967009F09DE /* KidsHelpReading.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KidsHelpReading.entitlements; sourceTree = "<group>"; };
 		E1152D1A1DC5508000C0083F /* StoryModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryModelTests.swift; sourceTree = "<group>"; };
+		E15712CD1DF0DCDD0070C4CF /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E16988AB1DC401D800E6F8DF /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E16988AD1DC40EB300E6F8DF /* GamePlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePlayerModel.swift; sourceTree = "<group>"; };
 		E16988B31DC4983800E6F8DF /* KidsHelpReadingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KidsHelpReadingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E19CA4401DC28DF3000C6C7C /* ReadViewController.swift */,
+				E15712CD1DF0DCDD0070C4CF /* HomeViewController.swift */,
 				E16988AB1DC401D800E6F8DF /* GameViewController.swift */,
 				E19CA4421DC28DF3000C6C7C /* CreatorViewController.swift */,
 				E1B62E061DC2A833009E2D98 /* SettingsTableViewController.swift */,
@@ -355,6 +358,7 @@
 				E19CA4411DC28DF3000C6C7C /* ReadViewController.swift in Sources */,
 				E1B62E071DC2A833009E2D98 /* SettingsTableViewController.swift in Sources */,
 				E1B62E961DC2C4B2009E2D98 /* DataContainer.swift in Sources */,
+				E15712CE1DF0DCDD0070C4CF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
