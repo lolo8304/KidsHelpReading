@@ -85,10 +85,17 @@ class CreatorViewController: UIViewController, UITextViewDelegate, UINavigationC
     }
     @IBAction func deleteItem(_ sender: UIBarButtonItem) {
         if (self.container.selectedStory != nil) {
-            self.container.deleteStory(story: self.container.selectedStory!)
-            self.container.selectedStory = nil
+            let alert = UIAlertController(title: "Achtung", message: "Wollen Sie die Geschichte '\(self.container.selectedStory!.title!)' wirklich löschen?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.destructive, handler: { action in
+                self.container.deleteStory(story: self.container.selectedStory!)
+                self.container.selectedStory = nil
+                self.navigationController!.popViewController(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Nein", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.navigationController!.popViewController(animated: true)
         }
-        self.navigationController!.popViewController(animated: true)
     }
 
     @IBAction func capture(_ sender: UIBarButtonItem) {
@@ -267,7 +274,7 @@ extension CreatorViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let selectedPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let scaledImage = scaleImage(image: selectedPhoto, maxDimension: 640)
+        let scaledImage = scaleImage(image: selectedPhoto, maxDimension: 1024)
         self.image.image = scaledImage
         
         addActivityIndicator()
