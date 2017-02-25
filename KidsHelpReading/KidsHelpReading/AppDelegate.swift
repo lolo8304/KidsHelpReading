@@ -43,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
             // Fallback on earlier versions
-        }
     }
+}
     
     var applicationDocumentsDirectory: NSURL = {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -88,6 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     
-    
+
 
 
