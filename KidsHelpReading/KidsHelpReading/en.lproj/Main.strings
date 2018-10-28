@@ -1,0 +1,117 @@
+
+/* Class = "UINavigationController"; title = "Navigation"; ObjectID = "0w2-f2-EDA"; */
+"0w2-f2-EDA.title" = "Navigation";
+
+/* Class = "UILabel"; text = "mit Spass !!!"; ObjectID = "1g9-aL-vtO"; */
+"1g9-aL-vtO.text" = "with Fun !!!";
+
+/* Class = "UINavigationItem"; title = "Einstellungen"; ObjectID = "27Z-nf-zRm"; */
+"27Z-nf-zRm.title" = "Settings";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "28y-m5-asd"; */
+"28y-m5-asd.text" = "0";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "2h9-Rl-Ima"; */
+"2h9-Rl-Ima.text" = "30";
+
+/* Class = "UILabel"; text = "Satzfolge in Geschichte"; ObjectID = "4N1-vd-FXH"; */
+"4N1-vd-FXH.text" = "Satzfolge in Geschichte";
+
+/* Class = "UILabel"; text = "Wort in Satz (mit Unterstützung)"; ObjectID = "7Cc-x4-Tq1"; */
+"7Cc-x4-Tq1.text" = "Word in Sentence (supported)";
+
+/* Class = "UILabel"; text = "Sprache1"; ObjectID = "7Kl-3w-h6a"; */
+"7Kl-3w-h6a.text" = "Language1";
+
+/* Class = "UIButton"; normalTitle = " Hinzufügen"; ObjectID = "8ik-l9-lnc"; */
+"8ik-l9-lnc.normalTitle" = " Add";
+
+/* Class = "UITableViewSection"; headerTitle = "Spielmodus"; ObjectID = "9hi-sM-0yO"; */
+"9hi-sM-0yO.headerTitle" = "Gamemode";
+
+/* Class = "UILabel"; text = "_"; ObjectID = "A6U-AQ-mvf"; */
+"A6U-AQ-mvf.text" = "_";
+
+/* Class = "UILabel"; text = "#1"; ObjectID = "Evc-HA-T3q"; */
+"Evc-HA-T3q.text" = "#1";
+
+/* Class = "UILabel"; text = "Kinder lernen Lesen"; ObjectID = "F5g-yE-xRP"; */
+"F5g-yE-xRP.text" = "Kids helf reading";
+
+/* Class = "UITableViewSection"; headerTitle = "Sprachen"; ObjectID = "Gfl-V0-Cop"; */
+"Gfl-V0-Cop.headerTitle" = "Languages";
+
+/* Class = "UITextField"; placeholder = "Titel eingeben"; ObjectID = "ILn-yT-4FB"; */
+"ILn-yT-4FB.placeholder" = "Enter title";
+
+/* Class = "UIButton"; normalTitle = " Geschichten"; ObjectID = "NT3-L7-ZZh"; */
+"NT3-L7-ZZh.normalTitle" = " Stories";
+
+/* Class = "UIButton"; normalTitle = " Spielen"; ObjectID = "NhN-iW-plx"; */
+"NhN-iW-plx.normalTitle" = " Play";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "O7c-AV-Tcw"; */
+"O7c-AV-Tcw.text" = "00:00";
+
+/* Class = "UINavigationItem"; title = "Home"; ObjectID = "Scx-Oj-AGy"; */
+"Scx-Oj-AGy.title" = "Home";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Tox-3o-vgf"; */
+"Tox-3o-vgf.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Geschichte bearbeiten / hinzufügen"; ObjectID = "VmB-bO-Xgr"; */
+"VmB-bO-Xgr.title" = "Edit Story / add";
+
+/* Class = "UILabel"; text = "00:00"; ObjectID = "VnU-g7-i4D"; */
+"VnU-g7-i4D.text" = "00:00";
+
+/* Class = "UILabel"; text = "Wort"; ObjectID = "WVE-5r-D8Q"; */
+"WVE-5r-D8Q.text" = "Word";
+
+/* Class = "UIBarButtonItem"; title = "Auswahl"; ObjectID = "Y7P-OL-XWn"; */
+"Y7P-OL-XWn.title" = "Choose";
+
+/* Class = "UIButton"; normalTitle = "Überspringen"; ObjectID = "ZjZ-jh-pRP"; */
+"ZjZ-jh-pRP.normalTitle" = "Skip";
+
+/* Class = "UITabBarItem"; title = "read"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "read";
+
+/* Class = "UITabBarItem"; title = "create"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "create";
+
+/* Class = "UIButton"; normalTitle = "Spell"; ObjectID = "fnG-sx-H11"; */
+"fnG-sx-H11.normalTitle" = "Spell";
+
+/* Class = "UINavigationItem"; title = "Lesen"; ObjectID = "fxA-ud-uUT"; */
+"fxA-ud-uUT.title" = "Lesen";
+
+/* Class = "UIButton"; normalTitle = "Stop"; ObjectID = "jYj-4M-fgl"; */
+"jYj-4M-fgl.normalTitle" = "Stop";
+
+/* Class = "UILabel"; text = "Sprache2"; ObjectID = "jtN-ph-VuB"; */
+"jtN-ph-VuB.text" = "Sprache2";
+
+/* Class = "UILabel"; text = "Zufallssatz"; ObjectID = "lLv-4M-tvt"; */
+"lLv-4M-tvt.text" = "Random sentence";
+
+/* Class = "UIButton"; normalTitle = "Statistiken"; ObjectID = "oWP-bO-wSl"; */
+"oWP-bO-wSl.normalTitle" = "Stats";
+
+/* Class = "UITableViewSection"; headerTitle = "Zurücksetzen"; ObjectID = "pAr-jl-6oI"; */
+"pAr-jl-6oI.headerTitle" = "Reset";
+
+/* Class = "UIButton"; normalTitle = " Einstellungen"; ObjectID = "pWI-VX-O3s"; */
+"pWI-VX-O3s.normalTitle" = " Settings";
+
+/* Class = "UINavigationItem"; title = "Spiel"; ObjectID = "r1N-zL-KAr"; */
+"r1N-zL-KAr.title" = "Game";
+
+/* Class = "UIButton"; normalTitle = "Geschichten"; ObjectID = "sRH-3q-l2v"; */
+"sRH-3q-l2v.normalTitle" = "Stories";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "uvQ-np-mwk"; */
+"uvQ-np-mwk.text" = "0";
+
+/* Class = "UILabel"; text = "Wort in Satz"; ObjectID = "yuM-1h-4kz"; */
+"yuM-1h-4kz.text" = "Word in sentence";

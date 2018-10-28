@@ -9,7 +9,17 @@
 import Foundation
 import UIKit
 import CoreData
+import AVFoundation
 
+public extension Array {
+    var randomElement: Element {
+        let index = Int(arc4random_uniform(UInt32(count)))
+        return self[index]
+    }
+    var randomElementIndex: Int {
+        return Int(arc4random_uniform(UInt32(count)))
+    }
+}
 
 extension Array where Element: Equatable {
     
@@ -42,7 +52,10 @@ class DataContainer {
         }
     }
     var mode: GameMode = GameModeWordFullSentenceAfterSentence()
-    
+    let speechVoices = NSOrderedSet(array: [ AVSpeechSynthesisVoice.currentLanguageCode(), "de-DE", "en-US"])
+    var speechVoice: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice.init(language: AVSpeechSynthesisVoice.currentLanguageCode())!
+    var speechLanguage: String = AVSpeechSynthesisVoice.currentLanguageCode()
+
     private init() {
     }
     
@@ -118,7 +131,7 @@ class DataContainer {
         
         do {
             self.data = try managedObjectContext.fetch(fetchRequest)
-             print(self.data)
+            //print(self.data)
             
         } catch {
             let fetchError = error as NSError
@@ -136,9 +149,22 @@ class DataContainer {
         return self.data
     }
     
+    func startGame() -> StoryModel {
+        if (self.selectedStory == nil) {
+            self.selectedStory = self.data.randomElement()
+        }
+        return self.selectedStory!
+    }
+    
     func resetGameMode() {
         self.resetGameMode(to: self.mode.mode())
     }
+    
+    func setSpeechLanguage(lang: String) {
+        self.speechLanguage = lang
+        self.speechVoice = AVSpeechSynthesisVoice(language: lang)!
+    }
+
     func resetGameMode(to: Int) {
         if (to == 0) {
             DataContainer.sharedInstance.setModeWord()

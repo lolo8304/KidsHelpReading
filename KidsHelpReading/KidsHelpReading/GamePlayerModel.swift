@@ -11,18 +11,8 @@ import CoreGraphics
 import UIKit
 
 
-private extension Array {
-    var randomElement: Element {
-        let index = Int(arc4random_uniform(UInt32(count)))
-        return self[index]
-    }
-    var randomElementIndex: Int {
-        return Int(arc4random_uniform(UInt32(count)))
-    }
-}
 
-
-extension String {
+public extension String {
     
     var allWords: [String] {
         var words = [String]()
@@ -80,7 +70,7 @@ extension String {
         } while ( lowerVariableRange.length > 0)
         let myString = NSMutableAttributedString(string: stringWord)
         for range in ranges {
-            myString.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellow , range: range)
+            myString.addAttribute(NSAttributedStringKey.backgroundColor, value: UIColor.yellow , range: range)
         }
         return myString
     }
@@ -243,7 +233,7 @@ extension GameModel {
     }
     func stop() {
         self.doneStep()
-        self.endTime = NSDate()
+        self.endTime = NSDate() as! Date
     }
     func word() -> String {
         return self.lastTimer().word!
@@ -281,7 +271,7 @@ extension GameModel {
 
     
     func currentSeconds() ->Int16 {
-        return Int16(NSDate().timeIntervalSince(self.startTime as! Date))
+        return Int16(NSDate().timeIntervalSince(self.startTime! as Date))
     }
     
     func startStep() {
@@ -334,7 +324,7 @@ extension TimeModel {
         if (self.cheatmode) {
             self.point = 0 - self.point
         }
-        self.seconds = Int16(NSDate().timeIntervalSince(self.startTime as! Date))
+        self.seconds = Int16(NSDate().timeIntervalSince(self.startTime! as Date))
         self.game!.updatePoints(point: self.point)
     }
     func skip() {
@@ -343,7 +333,7 @@ extension TimeModel {
     func initStep() {
         self.timermode = false
         self.cheatmode = false
-        self.startTime = NSDate()
+        self.startTime = NSDate() as! Date
         self.seconds = 0
         self.point = 1
     }

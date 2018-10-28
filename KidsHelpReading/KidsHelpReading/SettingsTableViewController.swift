@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 class SettingsTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
+    @IBOutlet weak var language1: GameModeTableViewCell!
+    @IBOutlet weak var language2: GameModeTableViewCell!
     @IBOutlet weak var settingsType0: GameModeTableViewCell!
     @IBOutlet weak var settingsType1: GameModeTableViewCell!
     @IBOutlet weak var settingsType2: GameModeTableViewCell!
@@ -18,15 +21,23 @@ class SettingsTableViewController: UITableViewController, UIGestureRecognizerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setMode(DataContainer.sharedInstance.mode.mode())
-        
+        //self.setLanguage(<#T##mode: Int##Int#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.registerTapEvent(cell: self.settingsType0)
-        self.registerTapEvent(cell: self.settingsType1)
-        self.registerTapEvent(cell: self.settingsType2)
-        self.registerTapEvent(cell: self.settingsType3)
-        self.registerTapEvent(cell: self.settingsType4)
+        let aSelector : Selector = #selector(SettingsTableViewController.press(_:))
+        self.registerTapEvent(cell: self.settingsType0, aSelector)
+        self.registerTapEvent(cell: self.settingsType1, aSelector)
+        self.registerTapEvent(cell: self.settingsType2, aSelector)
+        self.registerTapEvent(cell: self.settingsType3, aSelector)
+        self.registerTapEvent(cell: self.settingsType4, aSelector)
+        
+        let aLangSelector : Selector = #selector(SettingsTableViewController.languagePress(_:))
+        self.registerTapEvent(cell: self.language1, aLangSelector)
+        self.registerTapEvent(cell: self.language2, aLangSelector)
+        
+        (self.language1.contentView.subviews[0] as! UILabel).text = "de-CH"
+        (self.language2.contentView.subviews[0] as! UILabel).text = "en-US"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -34,9 +45,8 @@ class SettingsTableViewController: UITableViewController, UIGestureRecognizerDel
         super.didReceiveMemoryWarning()
     }
 
-    func registerTapEvent(cell: GameModeTableViewCell) {
+    func registerTapEvent(cell: GameModeTableViewCell, _ aSelector: Selector) {
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer()
-        let aSelector : Selector = #selector(SettingsTableViewController.press(_:))
         gesture.addTarget(self, action: aSelector)
         gesture.delegate = self;
         gesture.delaysTouchesBegan = true;
@@ -54,6 +64,15 @@ class SettingsTableViewController: UITableViewController, UIGestureRecognizerDel
         DataContainer.sharedInstance.resetGameMode(to: cell.tag)
     }
     
+    func setLanguageCells(cell: UITableViewCell) {
+        self.language1.accessoryType = .none
+        self.language2.accessoryType = .none
+        cell.accessoryType = .checkmark
+        let lang = (cell.contentView.subviews[0] as! UILabel).text
+        DataContainer.sharedInstance.setSpeechLanguage(lang: lang!)
+    }
+
+    
     func setMode(_ mode: Int) {
         if (mode == 0) { self.setModeCells(cell: self.settingsType0) }
         if (mode == 1) { self.setModeCells(cell: self.settingsType1) }
@@ -62,10 +81,20 @@ class SettingsTableViewController: UITableViewController, UIGestureRecognizerDel
         if (mode == 4) { self.setModeCells(cell: self.settingsType4) }
     }
     
+    func setLanguage(_ mode: Int) {
+        if (mode == 0) { self.setLanguageCells(cell: self.language1) }
+        if (mode == 1) { self.setLanguageCells(cell: self.language2) }
+    }
+
     // MARK: navigation
     @IBAction func press(_ sender: UITapGestureRecognizer) {
-            let cell: GameModeTableViewCell = sender.view as! GameModeTableViewCell
-            self.setModeCells(cell: cell)
+        let cell: GameModeTableViewCell = sender.view as! GameModeTableViewCell
+        self.setModeCells(cell: cell)
+    }
+    // MARK: navigation
+    @IBAction func languagePress(_ sender: UITapGestureRecognizer) {
+        let cell: GameModeTableViewCell = sender.view as! GameModeTableViewCell
+        self.setLanguageCells(cell: cell)
     }
 
     

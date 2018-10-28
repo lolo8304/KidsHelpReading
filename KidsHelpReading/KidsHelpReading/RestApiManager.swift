@@ -9,7 +9,7 @@
 import Foundation
 
 
-class RestApiManager: NSObject {
+public class RestApiManager: NSObject {
     static let sharedInstance = RestApiManager()
     static let GoogleAPIKey1 = "AIza"
     static let GoogleAPIKey2 = "SyDihpH"
@@ -79,7 +79,7 @@ class RestApiManager: NSObject {
 }
 
 
-class GoogleImageSearch {
+public class GoogleImageSearch {
     let query: String
     var results: JSON?
     
@@ -152,7 +152,7 @@ class GoogleImageSearch {
 
 }
 
-extension String {
+public extension String {
     func getDocumentsURL() -> URL {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return documentsURL
@@ -195,7 +195,7 @@ extension String {
         }
     }
 
-    func loadImage() -> UIImage? {
+    public func loadImage() -> UIImage? {
         do {
             let fileName = self.fileInDocumentsDirectory()
             let image = UIImage(contentsOfFile: fileName)

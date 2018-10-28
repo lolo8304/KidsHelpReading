@@ -17,7 +17,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         return UIApplication.shared.delegate as! AppDelegate
     }
     var story: StoryModel {
-        return appDelegate.container!.selectedStory!
+        return appDelegate.container!.startGame();
     }
     
     @IBOutlet weak var minLabel: UILabel!
@@ -36,6 +36,9 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         
     @IBOutlet var gestureTap: UITapGestureRecognizer!
 
+    var speechVoice: AVSpeechSynthesisVoice {
+        return AVSpeechSynthesisVoice(language: appDelegate.container!.speechLanguage)!
+    }
     let speechSynthesizer = AVSpeechSynthesizer()
     var timer = Timer()
     var disableOKButtonTimer = Timer()
@@ -77,6 +80,8 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     
     
     func updateWord() {
+        //self.story.next()
+        //self.story.start()
         self.textToReadLabel.attributedText = self.story.word().fromBracketsToAttributes()
         self.listenAll.isEnabled = true
         self.listenButton.isEnabled = true
@@ -96,7 +101,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     }
 
     
-    func updateTime() {
+    @objc func updateTime() {
         
         var elapsedTime = self.story.lastGame().currentSeconds()
         
@@ -118,7 +123,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         speechSynthesizer.delegate = self
-
+        self.story.start()
         self.updateProgressBar()
         let aSelector : Selector = #selector(GameViewController.updateTime)
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
@@ -152,7 +157,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
     }
     
     
-    func enableOKButtonDelayed() {
+    @objc func enableOKButtonDelayed() {
         disableOKButtonTimer.invalidate()
         self.okButton.isEnabled = true
         self.okButton.backgroundColor = self.okButtonBackground
@@ -237,6 +242,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
             self.listenButton.isEnabled = false
             self.listenAll.isEnabled = false
             let speechUtterance = AVSpeechUtterance (string: self.extractBracketsFrom(sentence: self.story.word()))
+            speechUtterance.voice = self.speechVoice
             speechUtterance.rate = 0.4
             speechUtterance.pitchMultiplier = 1.0
 
@@ -257,6 +263,7 @@ class GameViewController: UIViewController, AVSpeechSynthesizerDelegate, UINavig
         if !speechSynthesizer.isSpeaking {
             self.listenAll.isEnabled = false
             let speechUtterance = AVSpeechUtterance (string: self.extractRawFrom(sentence: self.story.word()))
+            speechUtterance.voice = self.speechVoice
             speechUtterance.rate = 0.4
             speechUtterance.pitchMultiplier = 1.0
 

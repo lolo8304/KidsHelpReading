@@ -53,6 +53,12 @@
       "idiom" : "ipad",
       "filename" : "student-color@83.5x83.5-2.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "student-color@1024x1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

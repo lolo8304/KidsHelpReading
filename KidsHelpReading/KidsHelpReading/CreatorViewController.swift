@@ -209,7 +209,7 @@ extension CreatorViewController: UITextFieldDelegate {
         moveViewDown()
     }
     
-    private func textViewDidBeginEditing(_ textView: UITextView) {
+    internal func textViewDidBeginEditing(_ textView: UITextView) {
         moveViewDown()
     }
     
@@ -218,7 +218,7 @@ extension CreatorViewController: UITextFieldDelegate {
         // 1
         let tesseract = G8Tesseract(language: "deu", engineMode: .tesseractOnly)
 
-        tesseract?.pageSegmentationMode = .autoOSD
+        tesseract?.pageSegmentationMode = .autoOnly
         // 5
         tesseract?.maximumRecognitionTime = 60.0
         // 6

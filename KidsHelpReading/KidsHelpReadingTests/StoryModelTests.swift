@@ -8,7 +8,6 @@
 
 import XCTest
 
-
 class StoryModelTests: GenericTestCase {
     
     var story = {

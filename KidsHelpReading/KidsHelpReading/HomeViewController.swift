@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.switchImage()
         let aSelector : Selector = #selector(HomeViewController.switchImage)
         timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: aSelector, userInfo: nil, repeats: true)
     }
@@ -26,10 +27,10 @@ class HomeViewController: UIViewController {
     }
 
 
-    func switchImage() {
+    @objc func switchImage() {
         var no: Int = lastNo
         repeat {
-            no = Int(arc4random_uniform(UInt32(3)))+1
+            no = Int(arc4random_uniform(UInt32(5)))+1
         } while (no == lastNo)
         self.imageView.image = UIImage(named: "kids-reading-\(no)")!
         lastNo = no
